@@ -70,8 +70,8 @@
             <h3><?php echo $number_of_orders; ?></h3>
             <p>Order Placed</p>
          </div>
-         <div class="box">
          
+         <div class="box">
 <?php 
    $select_products = mysqli_query($conn, "SELECT * FROM `products`") or die('Query failed');
    $number_of_products = mysqli_num_rows($select_products);
@@ -82,35 +82,15 @@
          </div>
 
          <div class="box">
-
 <?php 
-   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE user_type = 'user'") or die('Query failed');
+   $select_users = mysqli_query($conn, "SELECT * FROM `users`") or die('Query failed');
    $number_of_users = mysqli_num_rows($select_users);
 ?>
 
             <h3><?php echo $number_of_users; ?></h3>
-            <p>Normal Users</p>
+            <p>Users</p>
          </div>
-         <div class="box">
-         
-<?php 
-   $select_admins = mysqli_query($conn, "SELECT * FROM `users` WHERE user_type = 'admin'") or die('Query failed');
-   $number_of_admins = mysqli_num_rows($select_admins);
-?>
 
-            <h3><?php echo $number_of_admins; ?></h3>
-            <p>Admin Users</p>
-         </div>
-         <div class="box">
-
-<?php 
-   $select_account = mysqli_query($conn, "SELECT * FROM `users`") or die('Query failed');
-   $number_of_account = mysqli_num_rows($select_account);
-?>
-
-      <h3><?php echo $number_of_account; ?></h3>
-         <p>Total Accounts</p>
-      </div>
 
       <div class="box">
          <?php 
