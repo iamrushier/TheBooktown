@@ -48,7 +48,7 @@ html{
 section{
    padding:3rem 2rem;
 }
-
+/********* Global styles end *********/
 .empty{
    padding:1.5rem;
    text-align: center;
@@ -941,6 +941,30 @@ section{
    color:var(--purple);
 }
 
+/***************** Login Form Styles Start ***********************/
+.options {
+    display: flex;
+    font-size:14px;
+    text-decoration:none;
+    justify-content: space-between;
+    margin-top: 0px;
+    margin-bottom: 10px ;
+}
+.password{
+    margin-bottom: 0px;
+}
+.login-title{
+    display: flex;
+    justify-content:space-between;
+}
+.login-title p a{
+    font-size: 14px;
+}
+/***************** Login Form Styles End ***********************/
+
+
+
+
 
 
 
@@ -986,17 +1010,13 @@ section{
 }
 
 @media (max-width:450px){
-
    html{
       font-size: 50%;
    }
-
    .heading h3{
       font-size: 3.5rem;
    }
-
    .title{
       font-size: 3rem;
    }
-
 }

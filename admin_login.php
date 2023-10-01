@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login</title>
+   <title>Admin Login</title>
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <!-- custom css file link  -->
@@ -69,21 +69,16 @@ if(isset($message)){
 
    <form action="" method="post" class="login-box">
       <div class='login-title'>
-         <h3>User Login</h3>
-         <p><a href="admin_login.php">Login as Admin</a></p>
+         <h3>Admin Login</h3>
+         <p><a href="login.php">Login as User</a></p>
       </div>
       <input type="email" name="email" placeholder="Enter your Email" required class="box">
       <input type="password" name="password" placeholder="Enter your Password" required class="box password">
       <div class="options">
          <div id='forgot-pass'><a href="forgot_password.php">Forgot password?</a>
          </div>
-         <div id='new-user'>
-            <span>New user?</span>
-            <span><a href="register.php">Register here</a></span>
-         </div>
       </div>
       <input type="submit" name="submit" value="Login Now" class="btn">
-      
    </form>
 
 </div>
