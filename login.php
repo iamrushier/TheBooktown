@@ -39,19 +39,6 @@ if(isset($_POST['submit'])){
    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-<?php
-if(isset($message)){
-   foreach($message as $message){
-      echo '
-      <div class="message">
-         <span>'.$message.'</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
-   }
-}
-?>
    
 <div class="form-container">
 
@@ -60,6 +47,18 @@ if(isset($message)){
          <h3>User Login</h3>
          <p><a href="admin_login.php">Login as Admin</a></p>
       </div>
+	  <?php
+	if(isset($message)){
+		foreach($message as $message){
+			echo '
+			<div style="text-align:left;font-size:17px; color:red;margin-top:5px;margin-bottom:0px;">
+				<span>'.$message.'</span>
+				<i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+			</div>
+			';
+		}
+	}
+	?>
       <input type="email" name="email" placeholder="Enter your Email" required class="box">
       <input type="password" name="password" placeholder="Enter your Password" required class="box password">
       <div class="options">
@@ -71,7 +70,7 @@ if(isset($message)){
          </div>
       </div>
       <input type="submit" name="submit" value="Login Now" class="btn">
-      
+	  
    </form>
 
 </div>

@@ -63,10 +63,10 @@ if(isset($message)){
 
    <form action="" method="post">
       <h3>Register Now</h3>
-      <input type="text" name="name" placeholder="enter your name" required class="box">
-      <input type="email" name="email" placeholder="enter your email" required class="box">
-      <input type="password" name="password" placeholder="enter your password" required class="box">
-      <input type="password" name="cpassword" placeholder="confirm your password" required class="box">
+      <input type="text" name="name" placeholder="Enter Your Name" required class="box">
+      <input type="email" name="email" placeholder="Enter Your Email" required class="box">
+      <input type="password" name="password" placeholder="Enter Password" required class="box">
+      <input type="password" name="cpassword" placeholder="Confirm Password" required class="box">
       
       <input type="submit" name="submit" value="register now" class="btn">
       <p>Already Registered? <a href="login.php">Login Now</a></p>
