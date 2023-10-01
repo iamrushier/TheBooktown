@@ -20,10 +20,10 @@ if(isset($_POST['add_to_cart'])){
    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
 
    if(mysqli_num_rows($check_cart_numbers) > 0){
-      $message[] = 'already added to cart!';
+      $message[] = 'Already added to cart!';
    }else{
       mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
-      $message[] = 'product added to cart!';
+      $message[] = 'Product added to cart!';
    }
 
 }
@@ -52,7 +52,7 @@ if(isset($_POST['add_to_cart'])){
 <section class="home">
 
    <div class="content">
-      <h3>Hand Picked Book to your door.</h3>
+      <h3>Hand Picked Books to your door.</h3>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, quod? Reiciendis ut porro iste totam.</p>
       <a href="about.php" class="white-btn">discover more</a>
    </div>
@@ -61,7 +61,7 @@ if(isset($_POST['add_to_cart'])){
 
 <section class="products">
 
-   <h1 class="title">latest products</h1>
+   <h1 class="title">Latest Products</h1>
 
    <div class="box-container">
 
@@ -83,13 +83,13 @@ if(isset($_POST['add_to_cart'])){
       <?php
          }
       }else{
-         echo '<p class="empty">no products added yet!</p>';
+         echo '<p class="empty">No products added yet!</p>';
       }
       ?>
    </div>
 
    <div class="load-more" style="margin-top: 2rem; text-align:center">
-      <a href="shop.php" class="option-btn">load more</a>
+      <a href="shop.php" class="option-btn">Load More..</a>
    </div>
 
 </section>
@@ -103,9 +103,9 @@ if(isset($_POST['add_to_cart'])){
       </div>
 
       <div class="content">
-         <h3>about us</h3>
+         <h3>About Us</h3>
          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit quos enim minima ipsa dicta officia corporis ratione saepe sed adipisci?</p>
-         <a href="about.php" class="btn">read more</a>
+         <a href="about.php" class="btn">Read More</a>
       </div>
 
    </div>
@@ -115,9 +115,9 @@ if(isset($_POST['add_to_cart'])){
 <section class="home-contact">
 
    <div class="content">
-      <h3>have any questions?</h3>
+      <h3>Have Any Questions?</h3>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque cumque exercitationem repellendus, amet ullam voluptatibus?</p>
-      <a href="contact.php" class="white-btn">contact us</a>
+      <a href="contact.php" class="white-btn">Contact Us</a>
    </div>
 
 </section>
