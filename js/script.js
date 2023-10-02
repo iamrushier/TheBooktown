@@ -22,3 +22,8 @@ window.onscroll = () =>{
       document.querySelector('.header .header-2').classList.remove('active');
    }
 }
+var user_box = document.querySelector('.user-box');
+document.querySelector('#user-btn').onclick = () =>
+{
+	user_box.classList.toggle('active');
+}

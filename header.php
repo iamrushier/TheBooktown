@@ -12,23 +12,11 @@ if(isset($message)){
 ?>
 
 <header class="header">
-
-   <!--div class="header-1">
+   <link rel="stylesheet" href="css/styles.css">
       <div class="flex">
-         <div class="share">
-            <a href="#" class="fab fa-facebook-f">facebook</a>
-            <a href="#" class="fab fa-twitter">twitter</a>
-            <a href="#" class="fab fa-instagram">instagram</a>
-            <a href="#" class="fab fa-linkedin">linkedin</a>
-         </div>
-         <p><a href="login.php">Login</a> | <a href="register.php">Register</a> </p>
-      </div>
-   </div-->
-
-   <div class="header-2">
-      <div class="flex">
-         <a href="home.php" class="logo">The Booktown</a>
-
+         <div class="logo">
+            <a href="home.php" class="logo">The Booktown</a>
+         </div>   
          <nav class="navbar">
             <a href="home.php">Home</a>
             <a href="about.php">About</a>
@@ -38,9 +26,8 @@ if(isset($message)){
          </nav>
 
          <div class="icons">
-            <div id="menu-btn" class="fas fa-bars">Menu</div>
             <a href="search_page.php" class="fas fa-search">Search</a>
-            <div id="user-btn" class="fas fa-user">User</div>
+            <div id="user-btn" class="fas fa-user"> User </div>
             <?php
                $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
                $cart_rows_number = mysqli_num_rows($select_cart_number); 
@@ -48,12 +35,14 @@ if(isset($message)){
             <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(<?php echo $cart_rows_number; ?>)</span> </a>
          </div>
 
-         <div class="user-box">
+         <div class="user-box" id="user-box">
+            <div class="profile-photo">
+               <img src="" alt="">
+            </div>
             <p>Username : <span><?php echo $_SESSION['user_name']; ?></span></p>
             <p>Email : <span><?php echo $_SESSION['user_email']; ?></span></p>
             <a href="logout.php" class="delete-btn">Log Out</a>
          </div>
       </div>
-   </div>
-
+<script src="js/script.js"></script>
 </header>
