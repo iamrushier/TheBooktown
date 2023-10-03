@@ -3,22 +3,22 @@
 include 'config.php';
 session_start();
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
 
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
-   if(mysqli_num_rows($select_users) > 0){
+   if (mysqli_num_rows($select_users) > 0) {
 
       $row = mysqli_fetch_assoc($select_users);
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['user_email'] = $row['email'];
-         $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
+      $_SESSION['user_name'] = $row['name'];
+      $_SESSION['user_email'] = $row['email'];
+      $_SESSION['user_id'] = $row['id'];
+      header('location:home.php');
 
-   }else{
+   } else {
       $message[] = 'Incorrect Email or Password!';
    }
 
@@ -28,6 +28,7 @@ if(isset($_POST['submit'])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,42 +39,44 @@ if(isset($_POST['submit'])){
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-   
-<div class="form-container">
 
-   <form action="" method="post" class="login-box">
-      <div class='login-title'>
-         <h3>User Login</h3>
-         <p><a href="admin_login.php">Login as Admin</a></p>
-      </div>
-	  <?php
-	if(isset($message)){
-		foreach($message as $message){
-			echo '
+<body>
+
+   <div class="form-container">
+
+      <form action="" method="post" class="login-box">
+         <div class='login-title'>
+            <h3>User Login</h3>
+            <p><a href="admin_login.php">Login as Admin</a></p>
+         </div>
+         <?php
+         if (isset($message)) {
+            foreach ($message as $message) {
+               echo '
 			<div style="text-align:left;font-size:17px; color:red;margin-top:5px;margin-bottom:0px;">
-				<span>'.$message.'</span>
+				<span>' . $message . '</span>
 				<i class="fas fa-times" onclick="this.parentElement.remove();"></i>
 			</div>
 			';
-		}
-	}
-	?>
-      <input type="email" name="email" placeholder="Enter your Email" required class="box">
-      <input type="password" name="password" placeholder="Enter your Password" required class="box password">
-      <div class="options">
-         <div id='forgot-pass'><a href="forgot_password.php">Forgot password?</a>
+            }
+         }
+         ?>
+         <input type="email" name="email" placeholder="Enter your Email" required class="box">
+         <input type="password" name="password" placeholder="Enter your Password" required class="box password">
+         <div class="options">
+            <div id='forgot-pass'><a href="forgot_password.php">Forgot password?</a>
+            </div>
+            <div id='new-user'>
+               <span>New user?</span>
+               <span><a href="register.php">Register here</a></span>
+            </div>
          </div>
-         <div id='new-user'>
-            <span>New user?</span>
-            <span><a href="register.php">Register here</a></span>
-         </div>
-      </div>
-      <input type="submit" name="submit" value="Login Now" class="btn">
-	  
-   </form>
+         <input type="submit" name="submit" value="Login Now" class="btn">
 
-</div>
+      </form>
+
+   </div>
 
 </body>
+
 </html>

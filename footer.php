@@ -36,6 +36,8 @@
 
    </div>
 
-   <p class="credit"> &copy; Copyright  @<?php echo date('Y'); ?> by <span>J.Trio</span> </p>
+   <p class="credit"> &copy; Copyright @
+      <?php echo date('Y'); ?> by <span>J.Trio</span>
+   </p>
 
 </section>

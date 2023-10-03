@@ -1,9 +1,9 @@
 <?php
-if(isset($message)){
-   foreach($message as $message){
+if (isset($message)) {
+   foreach ($message as $message) {
       echo '
       <div class="message">
-         <span>'.$message.'</span>
+         <span>' . $message . '</span>
          <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
       </div>
       ';
@@ -13,36 +13,42 @@ if(isset($message)){
 
 <header class="header">
    <link rel="stylesheet" href="css/styles.css">
-      <div class="flex">
-         <div class="logo">
-            <a href="home.php" class="logo">The Booktown</a>
-         </div>   
-         <nav class="navbar">
-            <a href="home.php">Home</a>
-            <a href="about.php">About</a>
-            <a href="shop.php">Shop</a>
-            <a href="contact.php">Contact</a>
-            <a href="orders.php">Orders</a>
-         </nav>
-
-         <div class="icons">
-            <a href="search_page.php" class="fas fa-search">Search</a>
-            <div id="user-btn" class="fas fa-user"> User </div>
-            <?php
-               $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-               $cart_rows_number = mysqli_num_rows($select_cart_number); 
-            ?>
-            <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(<?php echo $cart_rows_number; ?>)</span> </a>
-         </div>
-
-         <div class="user-box" id="user-box">
-            <div class="profile-photo">
-               <img src="" alt="">
-            </div>
-            <p>Username : <span><?php echo $_SESSION['user_name']; ?></span></p>
-            <p>Email : <span><?php echo $_SESSION['user_email']; ?></span></p>
-            <a href="logout.php" class="delete-btn">Log Out</a>
-         </div>
+   <div class="flex">
+      <div class="logo">
+         <a href="home.php" class="logo">The Booktown</a>
       </div>
-<script src="js/script.js"></script>
+      <nav class="navbar">
+         <a href="home.php">Home</a>
+         <a href="about.php">About</a>
+         <a href="shop.php">Shop</a>
+         <a href="contact.php">Contact</a>
+         <a href="orders.php">Orders</a>
+      </nav>
+
+      <div class="icons">
+         <a href="search_page.php" class="fas fa-search">Search</a>
+         <div id="user-btn" class="fas fa-user"> User </div>
+         <?php
+         $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+         $cart_rows_number = mysqli_num_rows($select_cart_number);
+         ?>
+         <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(
+               <?php echo $cart_rows_number; ?>)
+            </span> </a>
+      </div>
+
+      <div class="user-box" id="user-box">
+         <div class="profile-photo">
+            <img src="" alt="">
+         </div>
+         <p>Username : <span>
+               <?php echo $_SESSION['user_name']; ?>
+            </span></p>
+         <p>Email : <span>
+               <?php echo $_SESSION['user_email']; ?>
+            </span></p>
+         <a href="logout.php" class="delete-btn">Log Out</a>
+      </div>
+   </div>
+   <script src="js/script.js"></script>
 </header>

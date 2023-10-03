@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,22 +15,24 @@
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-   
-<div class="form-container">
 
-   <form action="" method="post">
-      <div class='login-title'>
-         <h3>Reset Password</h3>
-      </div>
-      <input type="email" name="email" placeholder="Enter your Email" required class="box">
+<body>
+
+   <div class="form-container">
+
+      <form action="" method="post">
+         <div class='login-title'>
+            <h3>Reset Password</h3>
+         </div>
+         <input type="email" name="email" placeholder="Enter your Email" required class="box">
          <div style="text-align:right;">
             <p style="font-size:14px; margin-top:0px;padding-top:0px;"><a href="login.php">Back to Login</a></p>
          </div>
-      <input type="submit" name="submit" value="Verify Email" class="btn">
-   </form>
+         <input type="submit" name="submit" value="Verify Email" class="btn">
+      </form>
 
-</div>
+   </div>
 
 </body>
+
 </html>

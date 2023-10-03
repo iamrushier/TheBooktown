@@ -1,14 +1,14 @@
 <?php
-   if(isset($message)){
-      foreach($message as $message){
-         echo '
+if (isset($message)) {
+   foreach ($message as $message) {
+      echo '
             <div class="message">
-            <span>'.$message.'</span>
+            <span>' . $message . '</span>
             <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
             </div>
          ';
-      }
    }
+}
 ?>
 
 <header class="header">
@@ -26,8 +26,12 @@
          <div id="user-btn" class="fas fa-user"></div>
       </div>
       <div class="account-box">
-         <p>Username : <span><?php echo $_SESSION['admin_name']; ?></span></p>
-         <p>Email : <span><?php echo $_SESSION['admin_email']; ?></span></p>
+         <p>Username : <span>
+               <?php echo $_SESSION['admin_name']; ?>
+            </span></p>
+         <p>Email : <span>
+               <?php echo $_SESSION['admin_email']; ?>
+            </span></p>
          <a href="logout.php" class="delete-btn">Log out</a>
          <div>New <a href="login.php">Login</a> | <a href="register.php">Register</a></div>
       </div>

@@ -1,3 +1,3 @@
 <?php
-    include 'config.php'
-?>
+include 'config.php'
+    ?>
