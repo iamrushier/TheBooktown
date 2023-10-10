@@ -64,7 +64,17 @@ if (isset($_POST['order_btn'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/styles.css">
+   <!--link rel="stylesheet" href="css/styles.css"-->
+   <link rel="stylesheet" href="css/home-styles.css">
+   <link rel="stylesheet" href="css/footer.css">
+   <link rel="stylesheet" href="css/header.css">
+   <link rel="stylesheet" href="css/contact.css">
+   <link rel="stylesheet" href="css/shop.css">
+   <link rel="stylesheet" href="css/about.css">
+   <link rel="stylesheet" href="css/orders.css">
+   <link rel="stylesheet" href="css/search-page.css">
+   <link rel="stylesheet" href="css/cart.css">
+   <link rel="stylesheet" href="css/checkout.css">
 
 </head>
 
@@ -106,7 +116,7 @@ if (isset($_POST['order_btn'])) {
 
    <section class="checkout">
 
-      <form action="" method="post">
+      <form action="orders.php" method="post">
          <h3>Place Your Order</h3>
          <div class="flex">
             <div class="inputBox">
@@ -155,7 +165,7 @@ if (isset($_POST['order_btn'])) {
                <input type="number" min="0" max="999999" name="pin_code" required placeholder="e.g. 123456">
             </div>
          </div>
-         <input type="submit" value="order now" class="btn" name="order_btn">
+         <div class="center-solo"><input type="submit" value="order now" class="btn" name="order_btn"></div>
       </form>
 
    </section>

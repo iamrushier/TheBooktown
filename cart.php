@@ -43,7 +43,16 @@ if (isset($_GET['delete_all'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/styles.css">
+   <!--link rel="stylesheet" href="css/styles.css"-->
+   <link rel="stylesheet" href="css/home-styles.css">
+   <link rel="stylesheet" href="css/footer.css">
+   <link rel="stylesheet" href="css/header.css">
+   <link rel="stylesheet" href="css/contact.css">
+   <link rel="stylesheet" href="css/shop.css">
+   <link rel="stylesheet" href="css/about.css">
+   <link rel="stylesheet" href="css/orders.css">
+   <link rel="stylesheet" href="css/search-page.css">
+   <link rel="stylesheet" href="css/cart.css">
 
 </head>
 
@@ -70,7 +79,7 @@ if (isset($_GET['delete_all'])) {
                <div class="box">
                   <a href="cart.php?delete=<?php echo $fetch_cart['id']; ?>" class="fas fa-times"
                      onclick="return confirm('Delete this from cart?');"></a>
-                  <img src="uploaded_img/<?php echo $fetch_cart['image']; ?>" alt="">
+                  <img src="images/<?php echo $fetch_cart['image']; ?>" alt="">
                   <div class="name">
                      <?php echo $fetch_cart['name']; ?>
                   </div>
@@ -101,12 +110,14 @@ if (isset($_GET['delete_all'])) {
       </div>
 
       <div class="cart-total">
-         <p>Grand Total : <span>$
+         <p>Grand Total : <span>₹
                <?php echo $grand_total; ?>/-
-            </span></p>
-         <div class="flex">
-            <a href="shop.php" class="option-btn">Continue Shopping</a>
-            <a href="checkout.php" class="btn <?php echo ($grand_total > 1) ? '' : 'disabled'; ?>">Proceed to Checkout</a>
+            </span>
+         </p>
+         <div class="flex" id="checkout-box">
+            <a href="shop.php" class="btn">Continue Shopping</a>
+            <a href="checkout.php" class="btn <?php echo ($grand_total > 1) ? '' : 'disabled'; ?>">Proceed to
+               Checkout</a>
          </div>
       </div>
 

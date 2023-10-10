@@ -12,10 +12,10 @@ if (isset($message)) {
 ?>
 
 <header class="header">
-   <link rel="stylesheet" href="css/styles.css">
+   <link rel="stylesheet" href="css/header.css">
    <div class="flex">
       <div class="logo">
-         <a href="home.php" class="logo">The Booktown</a>
+         <a href="home.php" id="shop-name">The Booktown</a>
       </div>
       <nav class="navbar">
          <a href="home.php">Home</a>
@@ -32,8 +32,7 @@ if (isset($message)) {
          $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
          $cart_rows_number = mysqli_num_rows($select_cart_number);
          ?>
-         <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(
-               <?php echo $cart_rows_number; ?>)
+         <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(<?php echo $cart_rows_number; ?>)
             </span> </a>
       </div>
 

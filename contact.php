@@ -43,7 +43,13 @@ if (isset($_POST['send'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/styles.css">
+   <!--link rel="stylesheet" href="css/styles.css"-->
+   <link rel="stylesheet" href="css/home-styles.css">
+   <link rel="stylesheet" href="css/footer.css">
+   <link rel="stylesheet" href="css/header.css">
+   <link rel="stylesheet" href="css/contact.css">
+   <link rel="stylesheet" href="css/shop.css">
+   <link rel="stylesheet" href="css/about.css">
 
 </head>
 

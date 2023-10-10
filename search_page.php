@@ -45,7 +45,15 @@ if (isset($_POST['add_to_cart'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/styles.css">
+   <!--link rel="stylesheet" href="css/styles.css"-->
+   <link rel="stylesheet" href="css/home-styles.css">
+   <link rel="stylesheet" href="css/footer.css">
+   <link rel="stylesheet" href="css/header.css">
+   <link rel="stylesheet" href="css/contact.css">
+   <link rel="stylesheet" href="css/shop.css">
+   <link rel="stylesheet" href="css/about.css">
+   <link rel="stylesheet" href="css/orders.css">
+   <link rel="stylesheet" href="css/search-page.css">
 
 </head>
 
@@ -76,7 +84,7 @@ if (isset($_POST['add_to_cart'])) {
                while ($fetch_product = mysqli_fetch_assoc($select_products)) {
                   ?>
                   <form action="" method="post" class="box">
-                     <img src="uploaded_img/<?php echo $fetch_product['image']; ?>" alt="" class="image">
+                     <img src="images/<?php echo $fetch_product['image']; ?>" alt="" class="image">
                      <div class="name">
                         <?php echo $fetch_product['name']; ?>
                      </div>

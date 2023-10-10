@@ -8,7 +8,7 @@ $user_id = $_SESSION['user_id'];
 
 if (!isset($user_id)) {
    header('location:login.php');
-}
+}  // Auto redirect to login page if not signed in
 
 if (isset($_POST['add_to_cart'])) {
 
@@ -43,13 +43,15 @@ if (isset($_POST['add_to_cart'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/styles.css">
-
+   <!--link rel="stylesheet" href="css/styles.css"-->
+   <link rel="stylesheet" href="css/home-styles.css">
+   <link rel="stylesheet" href="css/footer.css">
+   <link rel="stylesheet" href="css/header.css">
 </head>
 
 <body>
 
-   <?php include 'header.php'; ?>
+   <?php include 'header.php';?>
 
    <section class="home">
 
@@ -74,7 +76,7 @@ if (isset($_POST['add_to_cart'])) {
             while ($fetch_products = mysqli_fetch_assoc($select_products)) {
                ?>
                <form action="" method="post" class="box">
-                  <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
+                  <img class="image" src="images/<?php echo $fetch_products['image']; ?>" alt="">
                   <div class="name">
                      <?php echo $fetch_products['name']; ?>
                   </div>
