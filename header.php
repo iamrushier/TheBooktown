@@ -12,7 +12,7 @@ if (isset($message)) {
 ?>
 
 <header class="header">
-   <link rel="stylesheet" href="css/header.css">
+   <!--link rel="stylesheet" href="css/header.css"-->
    <div class="flex">
       <div class="logo">
          <a href="home.php" id="shop-name">The Booktown</a>
@@ -27,27 +27,24 @@ if (isset($message)) {
 
       <div class="icons">
          <a href="search_page.php" class="fas fa-search">Search</a>
-         <div id="user-btn" class="fas fa-user"> User </div>
+         <div id="user-btn" class="fas fa-user"></div>
          <?php
          $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
          $cart_rows_number = mysqli_num_rows($select_cart_number);
          ?>
-         <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(<?php echo $cart_rows_number; ?>)
+         <a href="cart.php"> <i class="fas fa-shopping-cart"></i> <span>(
+               <?php echo $cart_rows_number; ?>)
             </span> </a>
       </div>
-
-      <div class="user-box" id="user-box">
-         <div class="profile-photo">
-            <img src="" alt="">
-         </div>
+      <div class="account-box">
          <p>Username : <span>
                <?php echo $_SESSION['user_name']; ?>
             </span></p>
          <p>Email : <span>
                <?php echo $_SESSION['user_email']; ?>
             </span></p>
-         <a href="logout.php" class="delete-btn">Log Out</a>
+         <a href="logout.php" class="delete-btn">Log out</a>
       </div>
    </div>
-   <script src="js/script.js"></script>
+   <!--script src="js/script.js"></script-->
 </header>

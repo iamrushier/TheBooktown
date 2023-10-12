@@ -75,57 +75,6 @@ html {
   font-weight: bold;
 }
 
-
-
-.account-box{
-  position: absolute;
-  top:120%; right:2rem;
-  width: 30rem;
-  box-shadow: var(--box-shadow);
-  border-radius: .5rem;
-  padding:2rem;
-  text-align: center;
-  border-radius: .5rem;
-  border:var(--border);
-  background-color: var(--white);
-  display: none;
-  animation:fadeIn .2s linear;
-}
-
-.account-box.active{
-  display: inline-block;
-}
-
-.account-box p{
-  font-size: 2rem;
-  color:var(--light-color);
-  margin-bottom: 1.5rem;
-}
-
-.account-box p span{
-  color:var(--purple);
-}
-
-.account-box .delete-btn{
-  margin-top: 0;
-}
-
-.account-box div{
-  margin-top: 1.5rem;
-  font-size: 2rem;
-  color:var(--light-color);
-}
-
-.account-box div a{
-  color:var(--orange);
-}
-
-.account-box div a:hover{
-  text-decoration: underline;
-}
-
-
-
 #shop-name{
   font-size: 35px;
   text-decoration: none;
@@ -189,32 +138,6 @@ html {
   transform: translateY(-50%);
 }
 
-.user-box {
-  background-color: #fff;
-  color: #333;
-  position: absolute;
-  top: 60px;
-  right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  width: 180px;
-  z-index: 1001;
-}
-
-.user-box img {
-  max-width: 100px;
-  max-height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.user-box p {
-  margin: 5px 0;
-}
 
 .delete-btn {
   background-color: #ff0000;
@@ -230,3 +153,63 @@ html {
 .delete-btn:hover {
   background-color: #cc0000;
 }
+
+
+
+
+.header .flex .icons div{
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
+
+.header .flex .icons div:hover{
+  color:var(--orange);
+}
+
+.header .flex .account-box{
+  position: absolute;
+  top:120%; right:2rem;
+  width: 30rem;
+  box-shadow: var(--box-shadow);
+  border-radius: .5rem;
+  padding:2rem;
+  text-align: center;
+  border-radius: .5rem;
+  border:var(--border);
+  background-color: var(--white);
+  display: none;
+  animation:fadeIn .3s linear;
+}
+
+.header .flex .account-box.active{
+  display: inline-block;
+}
+
+.header .flex .account-box p{
+  font-size: 2rem;
+  color:var(--light-color);
+  margin-bottom: 1.5rem;
+}
+
+.header .flex .account-box p span{
+  color:var(--purple);
+}
+
+.header .flex .account-box .delete-btn{
+  margin-top: 0;
+}
+
+.header .flex .account-box div{
+  margin-top: 1.5rem;
+  font-size: 2rem;
+  color:var(--light-color);
+}
+
+.header .flex .account-box div a{
+  color:var(--orange);
+}
+
+.header .flex .account-box div a:hover{
+  text-decoration: underline;
+}
+

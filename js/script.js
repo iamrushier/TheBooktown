@@ -1,29 +1,14 @@
-let userBox = document.querySelector('.header .header-2 .user-box');
+let accountBox = document.querySelector('.header .flex .account-box');
 
 document.querySelector('#user-btn').onclick = () =>{
-   userBox.classList.toggle('active');
-   navbar.classList.remove('active');
-}
-
-let navbar = document.querySelector('.header .header-2 .navbar');
-
-document.querySelector('#menu-btn').onclick = () =>{
-   navbar.classList.toggle('active');
-   userBox.classList.remove('active');
+   accountBox.classList.toggle('active');
 }
 
 window.onscroll = () =>{
-   userBox.classList.remove('active');
-   navbar.classList.remove('active');
-
-   if(window.scrollY > 60){
-      document.querySelector('.header .header-2').classList.add('active');
-   }else{
-      document.querySelector('.header .header-2').classList.remove('active');
-   }
+   accountBox.classList.remove('active');
 }
-var user_box = document.querySelector('.user-box');
-document.querySelector('#user-btn').onclick = () =>
-{
-	user_box.classList.toggle('active');
+
+document.querySelector('#close-update').onclick = () =>{
+   document.querySelector('.edit-product-form').style.display = 'none';
+   window.location.href = 'admin_products.php';
 }
