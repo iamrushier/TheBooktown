@@ -1,7 +1,7 @@
 <?php
 
 include 'config.php';
-
+echo '<script>console.log("Hello 1"); </script>';
 session_start();
 
 $user_id = $_SESSION['user_id'];
@@ -9,9 +9,9 @@ $user_id = $_SESSION['user_id'];
 if (!isset($user_id)) {
    header('location:login.php');
 }
-
+echo '<script>console.log("Hello 2"); </script>'; 
 if (isset($_POST['order_btn'])) {
-
+   echo '<script>console.log("Hello 3"); </script>';
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $number = $_POST['number'];
    $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -21,8 +21,9 @@ if (isset($_POST['order_btn'])) {
 
    $cart_total = 0;
    $cart_products[] = '';
-
+   echo '<script>console.log("Hello 4"); </script>'; 
    $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('Query failed');
+   echo "Hello";
    if (mysqli_num_rows($cart_query) > 0) {
       while ($cart_item = mysqli_fetch_assoc($cart_query)) {
          $cart_products[] = $cart_item['name'] . ' (' . $cart_item['quantity'] . ') ';
@@ -36,17 +37,21 @@ if (isset($_POST['order_btn'])) {
    $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$cart_total'") or die('Query failed');
 
    if ($cart_total == 0) {
+      echo '<script>console.log("Hello"); </script>'; 
       $message[] = 'Your cart is empty';
    } else {
+      echo '<script>console.log("Hello"); </script>'; 
       if (mysqli_num_rows($order_query) > 0) {
          $message[] = 'Order already placed!';
       } else {
+         echo '<script>console.log("Hello"); </script>'; 
          mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('Query failed');
          $message[] = 'Order Placed Successfully!';
          mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('Query failed');
       }
    }
-
+   header('Location: orders.php');
+   exit; 
 }
 
 ?>
@@ -64,7 +69,6 @@ if (isset($_POST['order_btn'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!-- custom css file link  -->
-   <!--link rel="stylesheet" href="css/styles.css"-->
    <link rel="stylesheet" href="css/home-styles.css">
    <link rel="stylesheet" href="css/footer.css">
    <link rel="stylesheet" href="css/header.css">
@@ -90,6 +94,7 @@ if (isset($_POST['order_btn'])) {
    <section class="display-order">
 
       <?php
+      echo '<script>console.log("Hello a"); </script>'; 
       $grand_total = 0;
       $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
       if (mysqli_num_rows($select_cart) > 0) {
@@ -116,7 +121,7 @@ if (isset($_POST['order_btn'])) {
 
    <section class="checkout">
 
-      <form action="orders.php" method="post">
+      <form action="" method="post">
          <h3>Place Your Order</h3>
          <div class="flex">
             <div class="inputBox">
