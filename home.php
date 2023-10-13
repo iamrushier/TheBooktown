@@ -40,9 +40,11 @@ if (isset($_POST['add_to_cart'])) {
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
    <link rel="stylesheet" href="css/home-styles.css">
    <link rel="stylesheet" href="css/footer.css">
    <link rel="stylesheet" href="css/header.css">
+
 </head>
 
 <body>
@@ -60,59 +62,65 @@ if (isset($_POST['add_to_cart'])) {
 
    </section>
 
-   <section class="products">
 
+   <section class="products">
       <h1 class="title">Latest Products</h1>
 
-      <div class="box-container">
-
-         <?php
-         $select_products = mysqli_query($conn, "SELECT * FROM `products` LIMIT 6") or die('query failed');
-         if (mysqli_num_rows($select_products) > 0) {
-            while ($fetch_products = mysqli_fetch_assoc($select_products)) {
-               ?>
-               <form action="" method="post" class="product-card">
-                  <div class="product-image">
-                     <img src="images/<?php echo $fetch_products['image']; ?>" alt="<?php echo $fetch_products['name']; ?>">
+      <div class="swiper-container">
+         <div class="swiper-wrapper">
+            <?php
+            $select_products = mysqli_query($conn, "SELECT * FROM `products` LIMIT 6") or die('query failed');
+            if (mysqli_num_rows($select_products) > 0) {
+               while ($fetch_products = mysqli_fetch_assoc($select_products)) {
+                  ?>
+                  <div class="swiper-slide">
+                     <form action="" method="post" class="product-card">
+                        <div class="product-image">
+                           <img src="images/<?php echo $fetch_products['image']; ?>"
+                              alt="<?php echo $fetch_products['name']; ?>">
+                        </div>
+                        <div class="product-details">
+                           <h2 class="product-name">
+                              <?php echo $fetch_products['name']; ?>
+                           </h2>
+                           <p id="product-author">By
+                              <?php echo $fetch_products['author']; ?>
+                           </p>
+                           <p class="product-description">
+                              <?php echo $fetch_products['description']; ?>
+                           </p>
+                           <div class="product-rating">
+                              <!-- Add your rating system here (e.g., stars, user reviews) -->
+                              <!-- Example: <span class="star"></span> -->
+                           </div>
+                        </div>
+                        <div class="product-action">
+                           <span class="product-price">$
+                              <?php echo $fetch_products['price']; ?>/-
+                           </span>
+                           <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
+                           <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
+                           <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
+                           <button type="submit" name="add_to_cart" class="btn" id="add-to-cart-btn">Add to Cart</button>
+                        </div>
+                     </form>
                   </div>
-                  <div class="product-details">
-                     <h2 class="product-name">
-                        <?php echo $fetch_products['name']; ?>
-                     </h2>
-                     <p id="product-author">By
-                        <?php echo $fetch_products['author']; ?>
-                     </p>
-                     <p class="product-description">
-                        <?php echo $fetch_products['description']; ?>
-                     </p>
-                     <div class="product-rating">
-                        <!-- Add your rating system here (e.g., stars, user reviews) -->
-                        <!-- Example: <span class="star"></span> -->
-                     </div>
-                  </div>
-                  <div class="product-action">
-                     <span class="product-price">$
-                        <?php echo $fetch_products['price']; ?>/-
-                     </span>
-                     <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
-                     <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
-                     <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
-                     <button type="submit" name="add_to_cart" class="btn" id="add-to-cart-btn">Add to Cart</button>
-                  </div>
-               </form>
-
-               <?php
+                  <?php
+               }
+            } else {
+               echo '<p class="empty">No products added yet!</p>';
             }
-         } else {
-            echo '<p class="empty">No products added yet!</p>';
-         }
-         ?>
-      </div>
+            ?>
+         </div>
 
+         <!-- Add pagination and navigation buttons -->
+         <div class="swiper-pagination"></div>
+         <div class="swiper-button-next"></div>
+         <div class="swiper-button-prev"></div>
+      </div>
       <div class="load-more" style="margin-top: 2rem; text-align:center">
          <a href="shop.php" class="option-btn">Load More..</a>
       </div>
-
    </section>
 
    <section class="about">
@@ -150,8 +158,20 @@ if (isset($_POST['add_to_cart'])) {
 
 
    <?php include 'footer.php'; ?>
-
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
    <!-- custom js file link  -->
+   <script>
+      var swiper = new Swiper('.swiper-container', {
+         slidesPerView: 'auto',
+         freeMode: true, // Enable freemode
+         spaceBetween: 20, // Adjust as needed
+         navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+         },
+      });
+   </script>
+
    <script src="js/script.js"></script>
 
 </body>
