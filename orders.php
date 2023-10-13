@@ -81,12 +81,11 @@ if (!isset($user_id)) {
                   <p> Total Price : <span>$
                         <?php echo $fetch_orders['total_price']; ?>/-
                      </span> </p>
-                  <p> Payment Status : <span
-                        style="color:<?php if ($fetch_orders['payment_status'] == 'pending') {
-                           echo 'red';
-                        } else {
-                           echo 'green';
-                        } ?>;">
+                  <p> Payment Status : <span style="color:<?php if ($fetch_orders['payment_status'] == 'pending') {
+                     echo 'red';
+                  } else {
+                     echo 'green';
+                  } ?>;">
                         <?php echo $fetch_orders['payment_status']; ?>
                      </span> </p>
                </div>

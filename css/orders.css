@@ -1,87 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
 
-:root {
-   --purple: #8e44ad;
-   --red: #c0392b;
-   --orange: #f39c12;
-   --black: #333;
-   --white: #fff;
-   --light-color: #666;
-   --light-white: #ccc;
-   --light-bg: #f5f5f5;
-   --border: .1rem solid var(--black);
-   --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+/* Placed Orders Section */
+.placed-orders {
+   padding: 20px;
 }
 
-* {
-   font-family: 'Rubik', sans-serif;
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   outline: none;
-   border: none;
-   text-decoration: none;
-   transition: all .2s linear;
+.title {
+   font-size: 24px;
+   text-align: center;
 }
 
-*::selection {
-   background-color: var(--purple);
-   color: var(--white);
+.box-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   justify-content: center;
 }
 
-*::-webkit-scrollbar {
-   height: .5rem;
-   width: 1rem;
+.box {
+   border: 1px solid #e0e0e0;
+   border-radius: 5px;
+   padding: 20px;
+   width: 300px;
+   background: #fff;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+   margin: 10px;
 }
 
-*::-webkit-scrollbar-track {
-   background-color: transparent;
+.box p {
+   font-size: 16px;
+   margin: 10px 0;
 }
 
-*::-webkit-scrollbar-thumb {
-   background-color: var(--purple);
+.box span {
+   font-weight: bold;
 }
 
-html {
-   font-size: 62.5%;
-   overflow-x: hidden;
+/* Payment Status Styling */
+.box p span[style="color: red;"] {
+   color: red;
 }
 
-
-
-.placed-orders .box-container {
-    display: flex;
-    justify-content: space-around;
-    width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.5rem;
- }
- 
- .placed-orders .box-container .empty {
-    flex: 1;
- }
- 
- .placed-orders .box-container .box {
-    flex: 1 1 40rem;
-    border-radius: .5rem;
-    padding: 2rem;
-    width: 500px;
-    border: var(--border);
-    text-align: left;
-    background-color: var(--light-bg);
-    padding: 1rem 2rem;
- }
- 
- .placed-orders .box-container .box p {
-    padding: 1rem 0;
-    font-size: 2rem;
-    color: var(--light-color);
- }
- 
- .placed-orders .box-container .box p span {
-    color: var(--purple);
- }
- 
+.box p span[style="color: green;"] {
+   color: green;
+}
