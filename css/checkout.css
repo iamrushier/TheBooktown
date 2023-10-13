@@ -1,134 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
-
-:root {
-   --purple: #8e44ad;
-   --red: #c0392b;
-   --orange: #f39c12;
-   --black: #333;
-   --white: #fff;
-   --light-color: #666;
-   --light-white: #ccc;
-   --light-bg: #f5f5f5;
-   --border: .1rem solid var(--black);
-   --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-}
-
-* {
-   font-family: 'Rubik', sans-serif;
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
-   outline: none;
-   border: none;
-   text-decoration: none;
-   transition: all .2s linear;
-}
-
-*::selection {
-   background-color: var(--purple);
-   color: var(--white);
-}
-
-*::-webkit-scrollbar {
-   height: .5rem;
-   width: 1rem;
-}
-
-*::-webkit-scrollbar-track {
-   background-color: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-   background-color: var(--purple);
-}
-
-html {
-   font-size: 62.5%;
-   overflow-x: hidden;
-}
-
+/* checkout.css */
 
 .display-order {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    padding-bottom: 0;
- }
- 
- .display-order p {
-    background-color: var(--light-bg);
-    color: var(--black);
-    font-size: 2rem;
-    padding: 1rem 1.5rem;
-    border: var(--border);
-    display: inline-block;
-    margin: .5rem;
- }
- 
- .display-order p span {
-    color: var(--red);
- }
- 
- .display-order .grand-total {
-    margin-top: 2rem;
-    font-size: 2.5rem;
-    color: var(--light-color);
- }
- 
- .display-order .grand-total span {
-    color: var(--red);
- }
- 
- .checkout form {
-    max-width: 1200px;
-    padding: 2rem;
-    margin: 0 auto;
-    border: var(--border);
-    background-color: var(--light-bg);
-    border-radius: .5rem;
- }
- 
- .checkout form h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--black);
-    text-transform: none
-       /*uppercase*/
-    ;
-    font-size: 3rem;
- }
- 
- .checkout form .flex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
- }
- 
- .checkout form .flex .inputBox {
-    flex: 1 1 40rem;
- }
- 
- .checkout form .flex span {
-    font-size: 2rem;
-    color: var(--black);
- }
- 
- .checkout form .flex select,
- .checkout form .flex input {
-    border: var(--border);
-    width: 100%;
-    border-radius: .5rem;
-    width: 100%;
-    background-color: var(--white);
-    padding: 1.2rem 1.4rem;
-    font-size: 1.8rem;
-    margin: 1rem 0;
- }
- .center-solo{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
- }
- 
- 
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f9f9f9;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin-top: 20px;
+   text-align: left;
+   font-size: 18px;
+}
+
+.display-order p {
+   margin: 10px 0;
+}
+
+.display-order .empty {
+   font-weight: bold;
+   color: red;
+}
+
+.grand-total {
+   margin-top: 20px;
+   font-size: 24px;
+   font-weight: bold;
+}
+
+.checkout {
+   max-width: 800px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #f9f9f9;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin-top: 20px;
+}
+
+.checkout h3 {
+   font-size: 24px;
+   font-weight: bold;
+   margin-bottom: 20px;
+}
+
+.checkout .flex {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.checkout .inputBox {
+   width: 50%;
+   padding: 7px;
+}
+
+.checkout .inputBox span {
+   display: block;
+   font-size: 15px;
+   margin-bottom: 5px;
+   font-weight: bold;
+}
+
+.checkout input[type="text"],
+.checkout input[type="number"],
+.checkout input[type="email"],
+.checkout select {
+   width: 100%;
+   padding: 7px;
+   margin-bottom: 15px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   font-size: 16px;
+}
+
+.checkout .center-solo {
+   text-align: center;
+   margin-top: 10px;
+}
+
+.checkout .btn {
+   background-color: #007bff;
+   color: #fff;
+   padding: 10px 20px;
+   font-size: 18px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s;
+}
+
+.checkout .btn:hover {
+   background-color: #0056b3;
+}
