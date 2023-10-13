@@ -80,21 +80,36 @@ if (isset($_POST['add_to_cart'])) {
             $search_item = $_POST['search'];
             $select_products = mysqli_query($conn, "SELECT * FROM `products` WHERE name LIKE '%{$search_item}%'") or die('query failed');
             if (mysqli_num_rows($select_products) > 0) {
-               while ($fetch_product = mysqli_fetch_assoc($select_products)) {
+               while ($fetch_products = mysqli_fetch_assoc($select_products)) {
                   ?>
-                  <form action="" method="post" class="box">
-                     <img src="images/<?php echo $fetch_product['image']; ?>" alt="" class="image">
-                     <div class="name">
-                        <?php echo $fetch_product['name']; ?>
+                  <form action="" method="post" class="product-card">
+                     <div class="product-image">
+                        <img src="images/<?php echo $fetch_products['image']; ?>" alt="<?php echo $fetch_products['name']; ?>">
                      </div>
-                     <div class="price">$
-                        <?php echo $fetch_product['price']; ?>/-
+                     <div class="product-details">
+                        <h2 class="product-name">
+                           <?php echo $fetch_products['name']; ?>
+                        </h2>
+                        <p id="product-author">By
+                           <?php echo $fetch_products['author']; ?>
+                        </p>
+                        <p class="product-description">
+                           <?php echo $fetch_products['description']; ?>
+                        </p>
+                        <div class="product-rating">
+                           <!-- Add your rating system here (e.g., stars, user reviews) -->
+                           <!-- Example: <span class="star"></span> -->
+                        </div>
                      </div>
-                     <input type="number" class="qty" name="product_quantity" min="1" value="1">
-                     <input type="hidden" name="product_name" value="<?php echo $fetch_product['name']; ?>">
-                     <input type="hidden" name="product_price" value="<?php echo $fetch_product['price']; ?>">
-                     <input type="hidden" name="product_image" value="<?php echo $fetch_product['image']; ?>">
-                     <input type="submit" class="btn" value="add to cart" name="add_to_cart">
+                     <div class="product-action">
+                        <span class="product-price">$
+                           <?php echo $fetch_products['price']; ?>/-
+                        </span>
+                        <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
+                        <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
+                        <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
+                        <button type="submit" name="add_to_cart" class="btn" id="add-to-cart-btn">Add to Cart</button>
+                     </div>
                   </form>
                   <?php
                }

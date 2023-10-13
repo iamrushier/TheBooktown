@@ -110,3 +110,32 @@ html {
     background-color: var(--white);
     color: var(--black);
 }
+
+
+
+.products .box-container .product-card .product-action {
+    width: 100%;
+    align-items: center;
+    background-color: #ff9900;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  #add-to-cart-btn {
+    background-color: yellow;
+    border-radius: 5px;
+    width: 55%;
+    height: 100%;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .add-to-cart-btn:hover {
+    background-color: #cc7700;
+  }
+  
