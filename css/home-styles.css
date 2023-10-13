@@ -392,6 +392,8 @@ section {
 .swiper-slide {
   width:250px !important;
   height: 400px !important;
+  margin-right: 10px;
+  margin-left: 10px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
