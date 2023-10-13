@@ -306,7 +306,7 @@ section {
 }
 
 .product-image {
-  min-height: 72%;
+  min-height: 70%;
   align-items: center;
   overflow: hidden;
   border-bottom: 1px solid #e2e2e2;
@@ -319,30 +319,20 @@ section {
   border-radius: 10px 10px 0 0;
   object-fit: cover;
 }
-
 .product-details {
   margin-left: 10px;
-  max-height: 30%;
+  min-height: 18%;
   font-size: 15px;
 }
 
 .product-details h2 {
-  font-size: 170%;
+  font-size: 2.5rem;
   padding-top: 5px;
-}
-
-.product-details p {
-  padding-left: 5px;
 }
 
 .product-name {
   font-weight: bold;
-  margin-bottom: 5px;
   color: #333;
-}
-
-#product-author {
-  margin-bottom: 5px;
 }
 
 .product-description {
@@ -350,6 +340,7 @@ section {
 }
 
 .product-price {
+  font-size: 2.2rem;
   font-weight: bold;
   color: black;
   margin: 5px;
@@ -361,6 +352,7 @@ section {
 }
 
 .product-action {
+  min-height: 12%;
   width: 100%;
   align-items: center;
   background-color: #ff9900;
@@ -373,7 +365,9 @@ section {
 
 #add-to-cart-btn {
   background-color: yellow;
-  border-radius: 5px;
+  font-size: 1.9rem;
+  border-radius: 0 0 10px 0;
+  border: 2px solid #8e44ad;
   width: 55%;
   height: 100%;
   color: red;
@@ -397,11 +391,11 @@ section {
 /* Styles for the individual swiper slides */
 .swiper-slide {
   width:250px !important;
-  height: 450px !important;
+  height: 400px !important;
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 10px;
+  padding: 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
