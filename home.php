@@ -54,9 +54,9 @@ if (isset($_POST['add_to_cart'])) {
    <section class="home">
 
       <div class="content">
-         <h3>Hand Picked Books to your door.</h3>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, quod? Reiciendis ut porro iste totam.
-         </p>
+         <h3>Hand Picked Books to your Doorstep.</h3>
+         <p>Immerse yourself in captivating stories, insightful knowledge, and literary adventures. Experience the joy
+            of reading like never before.</p>
          <a href="about.php" class="white-btn">discover more</a>
       </div>
 
@@ -66,7 +66,7 @@ if (isset($_POST['add_to_cart'])) {
    <section class="products">
       <h1 class="title">Latest Products</h1>
       <div class="category-container">
-         <h2 class="category-title">Category 1</h2>
+         <h2 class="category-title">Literature</h2>
          <a class="category-link" href="category1.php">View All</a>
          <div class="swiper-container" id="category1">
             <div class="swiper-wrapper">
@@ -122,7 +122,7 @@ if (isset($_POST['add_to_cart'])) {
          </div>
       </div>
       <div class="category-container">
-         <h2 class="category-title">Category 2</h2>
+         <h2 class="category-title">Fictional</h2>
          <a class="category-link" href="category2.php">View All</a>
          <div class="swiper-container" id="category2">
             <div class="swiper-wrapper">
@@ -191,9 +191,10 @@ if (isset($_POST['add_to_cart'])) {
          </div>
 
          <div class="content">
-            <h3>About Us</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit quos enim minima ipsa dicta officia
-               corporis ratione saepe sed adipisci?</p>
+            <h3>About The Booktown</h3>
+            <p>At The Booktown, we're more than just books; we're a community of passionate readers and book lovers. Our
+               mission is to connect you with handpicked, immersive literary experiences, bringing the world of
+               literature to your fingertips.</p>
             <a href="about.php" class="btn">Read More</a>
          </div>
 

@@ -66,32 +66,46 @@ body {
 section {
   padding: 3rem 2rem;
 }
-
 .home {
   min-height: 70vh;
-  background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(../images/home-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/home-bg.jpg) no-repeat;
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative; /* Add this to enable pseudo-element positioning */
 }
 
+/* Add a pseudo-element for the overlay */
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Adjust the background color and opacity as needed */
+  z-index: 1; /* Ensure it covers the background image */
+}
+
+/* Any other styles for your content within the .home section */
+
 .home .content {
+  z-index: 2;
   text-align: center;
-  width: 60rem;
+  width: 70rem;
 }
 
 .home .content h3 {
-  font-size: 5.5rem;
+  font-size: 5rem;
   color: var(--white);
   text-transform: none;
 }
 
 .home .content p {
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   color: var(--light-white);
-  padding: 1rem 0;
   line-height: 1.5;
 }
 
@@ -180,10 +194,19 @@ section {
 .about .flex .content p {
   padding: 1rem 0;
   line-height: 2;
-  font-size: 1.7rem;
+  font-size: 2rem;
   color: var(--light-color);
 }
-
+.content .btn{
+  font-size: 2rem;
+  width:70px;
+  height: 50px;
+  color: white;
+  background-color: var(--purple);
+  border: 1px solid yellow;
+  padding: 10px;
+  border-radius: 8px;
+}
 .home-contact {
   background-color: var(--black);
 }
