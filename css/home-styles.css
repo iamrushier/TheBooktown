@@ -384,7 +384,7 @@ section {
 /* Styles for the Swiper container */
 .swiper-container {
   margin: 20px auto; /* Adjust margins as needed */
-  max-width: 75%; /* Make it responsive to the container */
+  max-width: 85%; /* Make it responsive to the container */
   overflow: hidden; /* Hide the overflowing content */
 }
 
@@ -426,4 +426,69 @@ section {
   top: 50%;
   left: 10px; /* Adjust the left position */
   transform: translateY(-50%);
+}
+
+
+.category-container {
+  border: 2px solid #007BFF; /* Add a border around the category container */
+  border-radius: 5px;
+  width:80%;
+  margin: 25px auto;
+  padding: 20px;
+  background-color: #f9f9f9; /* Add background color */
+  position: relative;
+}
+
+.category-title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.category-link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  text-decoration: none;
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.category-link:hover {
+  background-color: #0056b3; /* Change color on hover */
+}
+
+/* Style the swiper-container */
+.swiper-container {
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+
+.swiper-slide {
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.swiper-slide img {
+  margin-top: -5px; 
+}
+
+/* Customize the navigation buttons if needed */
+.swiper-button-next, .swiper-button-prev {
+  background-color: #007BFF;
+  color: #fff;
+  font-size: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
 }
