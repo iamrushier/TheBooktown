@@ -64,7 +64,7 @@ if (isset($_POST['add_to_cart'])) {
 
 
    <section class="products">
-      <h1 class="title">Latest Products</h1>
+      <h1 class="title">Latest Books</h1>
       <div class="category-container">
          <h2 class="category-title">Literature</h2>
          <a class="category-link" href="category1.php">View All</a>
@@ -92,12 +92,12 @@ if (isset($_POST['add_to_cart'])) {
                                  <?php echo $fetch_products['description']; ?>
                               </p>
                               <div class="product-rating">
-                                 <!-- Add your rating system here (e.g., stars, user reviews) -->
+                                 <!-- Add rating system here (e.g., stars, user reviews) -->
                                  <!-- Example: <span class="star"></span> -->
                               </div>
                            </div>
                            <div class="product-action">
-                              <span class="product-price">$
+                              <span class="product-price">₹
                                  <?php echo $fetch_products['price']; ?>/-
                               </span>
                               <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
@@ -153,7 +153,7 @@ if (isset($_POST['add_to_cart'])) {
                               </div>
                            </div>
                            <div class="product-action">
-                              <span class="product-price">$
+                              <span class="product-price">₹
                                  <?php echo $fetch_products['price']; ?>/-
                               </span>
                               <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
