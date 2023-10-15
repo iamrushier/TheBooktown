@@ -40,7 +40,7 @@ if (isset($_POST['add_to_cart'])) {
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+   <link rel="stylesheet" href="css/swiper-bundle.min.css">
    <link rel="stylesheet" href="css/home-styles.css">
    <link rel="stylesheet" href="css/footer.css">
    <link rel="stylesheet" href="css/header.css">
@@ -218,7 +218,7 @@ if (isset($_POST['add_to_cart'])) {
 
 
    <?php include 'footer.php'; ?>
-   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+   <script src="js/swiper-bundle.min.js"></script>
    <!-- custom js file link  -->
    <script>
       var swiper = new Swiper('.swiper-container', {
