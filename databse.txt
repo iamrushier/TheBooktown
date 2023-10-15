@@ -1,3 +1,6 @@
+
+mysql> use shop_db;
+Database changed
 mysql> show tables;
 +-------------------+
 | Tables_in_shop_db |
@@ -9,7 +12,7 @@ mysql> show tables;
 | products          |
 | users             |
 +-------------------+
-6 rows in set (0.00 sec)
+6 rows in set (0.04 sec)
 
 mysql> desc admin;
 +----------+--------------+------+-----+---------+----------------+
@@ -33,7 +36,7 @@ mysql> desc cart;
 | quantity | int          | NO   |     | NULL    |                |
 | image    | varchar(100) | NO   |     | NULL    |                |
 +----------+--------------+------+-----+---------+----------------+
-6 rows in set (0.01 sec)
+6 rows in set (0.00 sec)
 
 mysql> desc message;
 +---------+--------------+------+-----+---------+----------------+
@@ -67,15 +70,18 @@ mysql> desc orders;
 11 rows in set (0.00 sec)
 
 mysql> desc products;
-+-------+--------------+------+-----+---------+----------------+
-| Field | Type         | Null | Key | Default | Extra          |
-+-------+--------------+------+-----+---------+----------------+
-| id    | int          | NO   | PRI | NULL    | auto_increment |
-| name  | varchar(100) | NO   |     | NULL    |                |
-| price | int          | NO   |     | NULL    |                |
-| image | varchar(100) | NO   |     | NULL    |                |
-+-------+--------------+------+-----+---------+----------------+
-4 rows in set (0.01 sec)
++-------------+--------------+------+-----+-------------+----------------+
+| Field       | Type         | Null | Key | Default     | Extra          |
++-------------+--------------+------+-----+-------------+----------------+
+| id          | int          | NO   | PRI | NULL        | auto_increment |
+| name        | varchar(100) | NO   |     | NULL        |                |
+| price       | int          | NO   |     | NULL        |                |
+| image       | varchar(100) | NO   |     | NULL        |                |
+| author      | varchar(255) | NO   |     | Unknown     |                |
+| description | varchar(255) | NO   |     | Not defined |                |
+| rating      | decimal(3,2) | NO   |     | 1.00        |                |
++-------------+--------------+------+-----+-------------+----------------+
+7 rows in set (0.00 sec)
 
 mysql> desc users;
 +----------+--------------+------+-----+---------+----------------+
