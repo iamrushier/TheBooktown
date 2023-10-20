@@ -40,12 +40,13 @@ if (!isset($user_id)) {
             <img src="images/about-img.jpg" alt="">
          </div>
          <div class="content">
-            <h3>why choose us?</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet voluptatibus aut hic molestias,
-               reiciendis natus fuga, cumque excepturi veniam ratione iure. Excepturi fugiat placeat iusto facere id
-               officia assumenda temporibus?</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit quos enim minima ipsa dicta officia
-               corporis ratione saepe sed adipisci?</p>
+            <h3>Why Choose Us?</h3>
+            <p>At "The Booktown," we're all about students. We make getting your hands on affordable, quality
+               second-hand textbooks a breeze. Plus, you can sell your old books and pocket some extra cash. Join us and
+               be part of a community that cares about your education and your budget.
+            </p>
+
+
             <a href="contact.php" class="btn">contact us</a>
          </div>
       </div>
@@ -56,8 +57,8 @@ if (!isset($user_id)) {
       <div class="box-container">
          <div class="box">
             <img src="images/pic-1.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ad, quo labore fugiat nam accusamus quia.
-               Ducimus repudiandae dolore placeat.</p>
+            <p>"The Booktown is a game-changer for students. I found amazing deals on second-hand books, saved money,
+               and selling my old books was a breeze. Highly recommend!"</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -66,11 +67,13 @@ if (!isset($user_id)) {
                <i class="fas fa-star-half-alt"></i>
             </div>
             <h3>John Deo</h3>
+
+
          </div>
          <div class="box">
             <img src="images/pic-2.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ad, quo labore fugiat nam accusamus quia.
-               Ducimus repudiandae dolore placeat.</p>
+            <p>"The Booktown is a student's dream. I've saved big on second-hand textbooks and made quick cash selling
+               my own. Highly recommended!"</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -78,12 +81,14 @@ if (!isset($user_id)) {
                <i class="fas fa-star"></i>
                <i class="fas fa-star-half-alt"></i>
             </div>
-            <h3>John Deo</h3>
+            <h3>Jane Smith</h3>
+
+
          </div>
          <div class="box">
             <img src="images/pic-3.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ad, quo labore fugiat nam accusamus quia.
-               Ducimus repudiandae dolore placeat.</p>
+            <p>"The Booktown is a game-changer for students. Amazing savings on books and effortless selling. Highly
+               recommended!"</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -91,12 +96,12 @@ if (!isset($user_id)) {
                <i class="fas fa-star"></i>
                <i class="fas fa-star-half-alt"></i>
             </div>
-            <h3>John Deo</h3>
+            <h3>Michael Brown</h3>
+
          </div>
          <div class="box">
             <img src="images/pic-4.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ad, quo labore fugiat nam accusamus quia.
-               Ducimus repudiandae dolore placeat.</p>
+            <p>"The Booktown rocks! Affordable books and a breeze to sell. A student's dream come true!"</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -104,12 +109,14 @@ if (!isset($user_id)) {
                <i class="fas fa-star"></i>
                <i class="fas fa-star-half-alt"></i>
             </div>
-            <h3>John Deo</h3>
+            <h3>Lisa Smith</h3>
+
+
          </div>
          <div class="box">
             <img src="images/pic-5.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ad, quo labore fugiat nam accusamus quia.
-               Ducimus repudiandae dolore placeat.</p>
+            <p>"For students, "The Booktown" is a blessing. Big savings on textbooks and easy earnings. Highly
+               recommended!"</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -117,12 +124,12 @@ if (!isset($user_id)) {
                <i class="fas fa-star"></i>
                <i class="fas fa-star-half-alt"></i>
             </div>
-            <h3>John Deo</h3>
+            <h3>David Johnson</h3>
+
          </div>
          <div class="box">
             <img src="images/pic-6.png" alt="">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt ad, quo labore fugiat nam accusamus quia.
-               Ducimus repudiandae dolore placeat.</p>
+            <p>""The Booktown" is fantastic. Affordable textbooks, easy selling process. Ideal for students!"</p>
             <div class="stars">
                <i class="fas fa-star"></i>
                <i class="fas fa-star"></i>
@@ -130,7 +137,8 @@ if (!isset($user_id)) {
                <i class="fas fa-star"></i>
                <i class="fas fa-star-half-alt"></i>
             </div>
-            <h3>John Deo</h3>
+            <h3>Emily Davis</h3>
+
          </div>
       </div>
    </section>

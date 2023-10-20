@@ -67,7 +67,7 @@ if (isset($_POST['add_to_cart'])) {
       <h1 class="title">Latest Books</h1>
       <div class="category-container">
          <h2 class="category-title">Literature</h2>
-         <a class="category-link" href="category1.php">View All</a>
+         <a class="category-link" href="literature.php">View All</a>
          <div class="swiper-container" id="category1">
             <div class="swiper-wrapper">
                <?php
@@ -123,7 +123,7 @@ if (isset($_POST['add_to_cart'])) {
       </div>
       <div class="category-container">
          <h2 class="category-title">Fictional</h2>
-         <a class="category-link" href="category2.php">View All</a>
+         <a class="category-link" href="novel.php">View All</a>
          <div class="swiper-container" id="category2">
             <div class="swiper-wrapper">
                <?php

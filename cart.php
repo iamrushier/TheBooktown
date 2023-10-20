@@ -83,7 +83,7 @@ if (isset($_GET['delete_all'])) {
                   <div class="name">
                      <?php echo $fetch_cart['name']; ?>
                   </div>
-                  <div class="price">$
+                  <div class="price">₹
                      <?php echo $fetch_cart['price']; ?>/-
                   </div>
                   <form action="" method="post">
@@ -91,7 +91,7 @@ if (isset($_GET['delete_all'])) {
                      <input type="number" min="1" name="cart_quantity" value="<?php echo $fetch_cart['quantity']; ?>">
                      <input type="submit" name="update_cart" value="update" class="option-btn">
                   </form>
-                  <div class="sub-total">Product Total : <span>$
+                  <div class="sub-total">Product Total : <span>₹
                         <?php echo $sub_total = ($fetch_cart['quantity'] * $fetch_cart['price']); ?>/-
                      </span> </div>
                </div>
