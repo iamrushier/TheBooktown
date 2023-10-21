@@ -6,12 +6,10 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 
-if (!isset($user_id)) {
-   header('location:login.php');
-}
-
 if (isset($_POST['add_to_cart'])) {
-
+   if (!isset($user_id)) {
+      header('location:login.php');
+   }
    $product_name = $_POST['product_name'];
    $product_price = $_POST['product_price'];
    $product_image = $_POST['product_image'];

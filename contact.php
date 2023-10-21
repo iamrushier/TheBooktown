@@ -6,12 +6,10 @@ session_start();
 
 $user_id = $_SESSION['user_id'];
 
-if (!isset($user_id)) {
-   header('location:login.php');
-}
-
 if (isset($_POST['send'])) {
-
+   if (!isset($user_id)) {
+      header('location:login.php');
+   }
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $number = $_POST['number'];
@@ -65,7 +63,7 @@ if (isset($_POST['send'])) {
    <section class="contact">
 
       <form action="" method="post">
-         <h3>Say something!</h3>
+         <h3>Have any queries?</h3>
          <input type="text" name="name" required placeholder="Enter your name" class="box">
          <input type="email" name="email" required placeholder="Enter your email" class="box">
          <input type="number" name="number" required placeholder="Enter your number" class="box">

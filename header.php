@@ -32,22 +32,39 @@ if (isset($message)) {
          $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
          $cart_rows_number = mysqli_num_rows($select_cart_number);
          ?>
-         <a href="cart.php"> <i class="fas fa-shopping-cart"></i>
+         <a href="cart.php"><i class="fas fa-shopping-cart"></i>
             <span>(<?php echo $cart_rows_number;?>)
             </span>
          </a>
       </div>
       <div class="account-box" id="user-box">
          <div class="profile-photo">
-            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" style="width:100%;height:100%;border-radius:100%" alt="">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+               style="width:100%;height:100%;border-radius:100%" alt="">
          </div>
-         <p>Username : <span>
-               <?php echo $_SESSION['user_name']; ?>
-            </span></p>
-         <p>Email : <span>
-               <?php echo $_SESSION['user_email']; ?>
-            </span></p>
-         <a href="logout.php" class="delete-btn">Log out</a>
+         <?php
+         if (isset($user_id)) { ?>
+            <p>Username :
+               <span>
+                  <?php echo $_SESSION['user_name']; ?>
+               </span>
+            </p>
+            <p>Email :
+               <span>
+                  <?php echo $_SESSION['user_email']; ?>
+               </span>
+            </p>
+            <a href="logout.php" class="delete-btn">Log out</a>
+            <?php
+         } else { ?>
+            <p>You have not Logged in yet!</p>
+            <span>
+               <a href="login.php" class="option-btn">Log in</a>
+               <a href="register.php" class="option-btn">Register</a>
+            </span>
+            <?php
+         }
+         ?>
       </div>
    </div>
 </header>

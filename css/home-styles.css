@@ -66,6 +66,7 @@ body {
 section {
   padding: 3rem 2rem;
 }
+
 .home {
   min-height: 70vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/home-bg.jpg) no-repeat;
@@ -74,7 +75,8 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative; /* Add this to enable pseudo-element positioning */
+  position: relative;
+  /* Add this to enable pseudo-element positioning */
 }
 
 /* Add a pseudo-element for the overlay */
@@ -85,8 +87,10 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Adjust the background color and opacity as needed */
-  z-index: 1; /* Ensure it covers the background image */
+  background: rgba(0, 0, 0, 0.6);
+  /* Adjust the background color and opacity as needed */
+  z-index: 1;
+  /* Ensure it covers the background image */
 }
 
 /* Any other styles for your content within the .home section */
@@ -197,9 +201,10 @@ section {
   font-size: 2rem;
   color: var(--light-color);
 }
-.content .btn{
+
+.content .btn {
   font-size: 2rem;
-  width:70px;
+  width: 70px;
   height: 50px;
   color: white;
   background-color: var(--purple);
@@ -207,6 +212,7 @@ section {
   padding: 10px;
   border-radius: 8px;
 }
+
 .home-contact {
   background-color: var(--black);
 }
@@ -342,6 +348,7 @@ section {
   border-radius: 10px 10px 0 0;
   object-fit: cover;
 }
+
 .product-details {
   margin-left: 10px;
   min-height: 18%;
@@ -406,14 +413,20 @@ section {
 /**************/
 /* Styles for the Swiper container */
 .swiper-container {
-  margin: 20px auto; /* Adjust margins as needed */
-  max-width: 85%; /* Make it responsive to the container */
-  overflow: hidden; /* Hide the overflowing content */
+  margin: 20px auto;
+  /* Adjust margins as needed */
+  max-width: 85%;
+  /* Make it responsive to the container */
+  overflow: hidden;
+  /* Hide the overflowing content */
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 /* Styles for the individual swiper slides */
 .swiper-slide {
-  width:250px !important;
+  width: 250px !important;
   height: 400px !important;
   margin-right: 10px;
   margin-left: 10px;
@@ -427,7 +440,8 @@ section {
 }
 
 /* Customize the navigation buttons if needed */
-.swiper-button-next, .swiper-button-prev {
+.swiper-button-next,
+.swiper-button-prev {
   background-color: #007BFF;
   color: #fff;
   border-radius: 50%;
@@ -440,25 +454,30 @@ section {
 .swiper-button-next {
   position: absolute;
   top: 50%;
-  right: 10px; /* Adjust the right position */
+  right: 10px;
+  /* Adjust the right position */
   transform: translateY(-50%);
 }
 
 .swiper-button-prev {
   position: absolute;
   top: 50%;
-  left: 10px; /* Adjust the left position */
+  left: 10px;
+  /* Adjust the left position */
   transform: translateY(-50%);
 }
 
 
 .category-container {
-  border: 2px solid #007BFF; /* Add a border around the category container */
+  border: 2px solid #007BFF;
+  /* Add a border around the category container */
   border-radius: 5px;
-  width:80%;
+  width: 80%;
+  height:70% !important;
   margin: 25px auto;
   padding: 20px;
-  background-color: #f9f9f9; /* Add background color */
+  background-color: #f9f9f9;
+  /* Add background color */
   position: relative;
 }
 
@@ -481,15 +500,12 @@ section {
 }
 
 .category-link:hover {
-  background-color: #0056b3; /* Change color on hover */
+  background-color: #0056b3;
+  /* Change color on hover */
 }
 
 /* Style the swiper-container */
-.swiper-container {
-  margin: 20px auto;
-  overflow: hidden;
-  border-radius: 10px;
-}
+
 
 
 .swiper-slide {
@@ -501,11 +517,12 @@ section {
 }
 
 .swiper-slide img {
-  margin-top: -5px; 
+  margin-top: -5px;
 }
 
 /* Customize the navigation buttons if needed */
-.swiper-button-next, .swiper-button-prev {
+.swiper-button-next,
+.swiper-button-prev {
   background-color: #007BFF;
   color: #fff;
   font-size: 30%;
