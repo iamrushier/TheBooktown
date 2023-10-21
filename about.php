@@ -154,7 +154,7 @@ if (!isset($user_id)) {
                <a href="#" class="fab fa-instagram"></a>
                <a href="#" class="fab fa-linkedin"></a>
             </div>
-            <h3>John Deo</h3>
+            <h3>Steve Smith</h3>
          </div>
          <div class="box">
             <img src="images/author-2.jpg" alt="">
@@ -164,7 +164,7 @@ if (!isset($user_id)) {
                <a href="#" class="fab fa-instagram"></a>
                <a href="#" class="fab fa-linkedin"></a>
             </div>
-            <h3>John Deo</h3>
+            <h3>Megan G.</h3>
          </div>
          <div class="box">
             <img src="images/author-3.jpg" alt="">
@@ -174,7 +174,7 @@ if (!isset($user_id)) {
                <a href="#" class="fab fa-instagram"></a>
                <a href="#" class="fab fa-linkedin"></a>
             </div>
-            <h3>John Deo</h3>
+            <h3>K. Williamson</h3>
          </div>
          <div class="box">
             <img src="images/author-4.jpg" alt="">
@@ -184,7 +184,7 @@ if (!isset($user_id)) {
                <a href="#" class="fab fa-instagram"></a>
                <a href="#" class="fab fa-linkedin"></a>
             </div>
-            <h3>John Deo</h3>
+            <h3>Natasha S.</h3>
          </div>
          <div class="box">
             <img src="images/author-5.jpg" alt="">
@@ -194,7 +194,7 @@ if (!isset($user_id)) {
                <a href="#" class="fab fa-instagram"></a>
                <a href="#" class="fab fa-linkedin"></a>
             </div>
-            <h3>John Deo</h3>
+            <h3>AB D.</h3>
          </div>
          <div class="box">
             <img src="images/author-6.jpg" alt="">
@@ -204,7 +204,7 @@ if (!isset($user_id)) {
                <a href="#" class="fab fa-instagram"></a>
                <a href="#" class="fab fa-linkedin"></a>
             </div>
-            <h3>John Deo</h3>
+            <h3>Varsha D.</h3>
          </div>
       </div>
    </section>

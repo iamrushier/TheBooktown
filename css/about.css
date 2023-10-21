@@ -97,9 +97,8 @@ html {
    color: var(--black);
    margin-top: 1rem;
 }
-
 .authors .box-container {
-   max-width: 60%;
+   max-width: 70%;
    margin: 0 auto;
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
@@ -110,8 +109,8 @@ html {
 
 .authors .box-container .box {
    height: 400px !important;
-   width: 325px;
-   margin: 8px;
+   width: 80%;
+   margin: 8px auto;
    position: relative;
    text-align: center;
    border: var(--border);
