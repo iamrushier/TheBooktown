@@ -1,7 +1,17 @@
 <?php
+//include 'config.php';
+//session_start();
+//$user_id = $_SESSION['user_id'];
 include 'config.php';
 session_start();
-$user_id = $_SESSION['user_id'];
+$l=0;
+foreach ($_SESSION as $key => $val) {
+   $l++;
+}
+$user_id=0;
+if ($l > 0) {
+   $user_id = $_SESSION['user_id'];
+}
 ?>
 
 <!DOCTYPE html>

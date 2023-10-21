@@ -1,13 +1,18 @@
 <?php
 
 include 'config.php';
-
 session_start();
-
-$user_id = $_SESSION['user_id'];
+$l=0;
+foreach ($_SESSION as $key => $val) {
+   $l++;
+}
+$user_id=0;
+if ($l > 0) {
+   $user_id = $_SESSION['user_id'];
+}
 
 if (isset($_POST['add_to_cart'])) {
-   if (!isset($user_id)) {
+   if ($user_id==0) {
       header('location:login.php');
    }
    $product_name = $_POST['product_name'];

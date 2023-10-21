@@ -207,63 +207,9 @@ html {
 
 /************Header start ************
 /***********Header styles***********/
-.logo {
+.header{
 
-   margin: 2rem;
-   margin-top: 2.5rem;
-   text-align: center;
-   font-weight: bold;
-   color: var(--purple);
-   font-size: 3.5rem;
 }
-
-
-
-.navbar {
-   width: 450px;
-   padding: 15px;
-   display: flex;
-   justify-content: space-between;
-   font-size: 22px;
-}
-
-.icons {
-   width: 270px;
-   padding: 15px;
-   display: flex;
-   justify-content: space-between;
-   font-size: 22px;
-}
-
-.user-box {
-   position: absolute;
-   right: -110%;
-   top: 10%;
-   width: 260px;
-   font-size: 20px;
-   padding: 10px;
-   border-color: var(--purple);
-   background-color: var(--light-bg);
-   border-radius: 5px;
-}
-
-.user-box.active {
-   right: 2rem;
-   transition: .2s linear;
-}
-
-.profile-photo {
-   border-radius: 60px;
-   background-color: grey;
-   width: 60px;
-   height: 60px;
-   margin-left: 90px;
-   margin-right: 90px;
-   margin-bottom: 10px;
-}
-
-/***********Header styles***********/
-
 
 /*********Copied**********/
 

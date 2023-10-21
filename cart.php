@@ -1,11 +1,18 @@
 <?php
 
 include 'config.php';
-
 session_start();
-$user_id = $_SESSION['user_id'];
+$l = 0;
+foreach ($_SESSION as $key => $val) {
+   $l++;
+}
+$user_id = 0;
+if ($l > 0) {
+   $user_id = $_SESSION['user_id'];
+}
 
-if (!isset($user_id)) {
+
+if ($user_id == 0) {
    header('location:login.php');
 }
 
@@ -13,7 +20,7 @@ if (isset($_POST['update_cart'])) {
    $cart_id = $_POST['cart_id'];
    $cart_quantity = $_POST['cart_quantity'];
    mysqli_query($conn, "UPDATE `cart` SET quantity = '$cart_quantity' WHERE id = '$cart_id'") or die('Query failed');
-   $message[] = 'cart quantity updated!';
+   $message[] = 'Cart quantity updated!';
 }
 
 if (isset($_GET['delete'])) {

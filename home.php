@@ -1,17 +1,22 @@
 <?php
 
 include 'config.php';
-
 session_start();
+$l=0;
+foreach ($_SESSION as $key => $val) {
+   $l++;
+}
+$user_id=0;
+if ($l > 0) {
+   $user_id = $_SESSION['user_id'];
+}
 
-$user_id = $_SESSION['user_id'];
-
-//if (!isset($user_id)) {
+//if ($user_id==0) {
 //   header('location:login.php');
 //} // Auto redirect to login page if not signed in
 
 if (isset($_POST['add_to_cart'])) {
-   if (!isset($user_id)) {
+   if ($user_id==0) {
       header('location:login.php');
    }
    $product_name = $_POST['product_name'];

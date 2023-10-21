@@ -9,6 +9,17 @@ if (isset($message)) {
       ';
    }
 }
+
+//added later
+include 'config.php';
+$l=0;
+foreach ($_SESSION as $key => $val) {
+   $l++;
+}
+$user_id=0;
+if ($l > 0) {
+   $user_id = $_SESSION['user_id'];
+}
 ?>
 
 <header class="header">
@@ -43,7 +54,7 @@ if (isset($message)) {
                style="width:100%;height:100%;border-radius:100%" alt="">
          </div>
          <?php
-         if (isset($user_id)) { ?>
+         if ($user_id!=0) { ?>
             <p>Username :
                <span>
                   <?php echo $_SESSION['user_name']; ?>

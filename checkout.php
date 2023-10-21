@@ -2,9 +2,16 @@
 
 include 'config.php';
 session_start();
+$l=0;
+foreach ($_SESSION as $key => $val) {
+   $l++;
+}
+$user_id=0;
+if ($l > 0) {
+   $user_id = $_SESSION['user_id'];
+}
 
-$user_id = $_SESSION['user_id'];
-if (!isset($user_id)) {
+if ($user_id==0) {
    header('location:login.php');
 }
 if (isset($_POST['order_btn'])) {
