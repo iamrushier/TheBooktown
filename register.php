@@ -41,13 +41,12 @@ if (isset($_POST['submit'])) {
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/styles.css">
+   <link rel="stylesheet" href="css/header.css">
 
 </head>
 
 <body>
-
-
-
+<?php include 'header.php'; ?>
    <?php
    if (isset($message)) {
       foreach ($message as $message) {

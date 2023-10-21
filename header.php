@@ -12,11 +12,13 @@ if (isset($message)) {
 
 //added later
 include 'config.php';
-$l=0;
-foreach ($_SESSION as $key => $val) {
-   $l++;
+$l = 0;
+if (isset($_SESSION)) {
+   foreach ($_SESSION as $key => $val) {
+      $l++;
+   }
 }
-$user_id=0;
+$user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
@@ -44,7 +46,8 @@ if ($l > 0) {
          $cart_rows_number = mysqli_num_rows($select_cart_number);
          ?>
          <a href="cart.php"><i class="fas fa-shopping-cart"></i>
-            <span>(<?php echo $cart_rows_number;?>)
+            <span>(
+               <?php echo $cart_rows_number; ?>)
             </span>
          </a>
       </div>
@@ -54,7 +57,7 @@ if ($l > 0) {
                style="width:100%;height:100%;border-radius:100%" alt="">
          </div>
          <?php
-         if ($user_id!=0) { ?>
+         if ($user_id != 0) { ?>
             <p>Username :
                <span>
                   <?php echo $_SESSION['user_name']; ?>
