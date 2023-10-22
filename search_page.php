@@ -11,10 +11,9 @@ if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
 
-if ($user_id == 0) {
-   header('location:login.php');
-}
-;
+//if ($user_id == 0) {
+//   header('location:login.php');
+//}
 
 if (isset($_POST['add_to_cart'])) {
    if ($user_id == 0) {
