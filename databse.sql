@@ -56,7 +56,7 @@ CREATE TABLE `cart` (
   `quantity` int NOT NULL,
   `image` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,6 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (14,1,'The happy lemon',345,1,'the_happy_lemon.jpg');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +83,7 @@ CREATE TABLE `message` (
   `number` varchar(12) NOT NULL,
   `message` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +92,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (1,1,'ff','ff@gg','55','holla');
+INSERT INTO `message` VALUES (1,1,'ff','ff@gg','55','holla'),(2,0,'hhjb','rushikeshsurve193@gmail.com','07499450771','Hello');
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +116,7 @@ CREATE TABLE `orders` (
   `placed_on` varchar(50) NOT NULL,
   `payment_status` varchar(20) NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +125,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'33','33','111@111.com','cash on delivery','flat no. 33, 33, 33, 33 - 33',', Lloyd (1) ',149,'12-Oct-2023','pending'),(2,1,'45','45','111@111.com','cash on delivery','flat no. 45, 45, 45, 45 - 45',', Red Queen (2) , The happy lemon (1) ',545,'12-Oct-2023','completed');
+INSERT INTO `orders` VALUES (6,1,'Hardik Pandya','7499450771','pandyahardik@gmail.com','Cash on delivery','flat no. Gujrat Titans, IPL, Surat, India - 412416',', The happy lemon (1) , Nightshade (2) ',1701,'21-Oct-2023','pending'),(7,3,'Rushikesh Shekhar Surve','7499450771','rushikeshsurve193@gmail.com','Cash on delivery','flat no. Ratnagiri, , Ratnagiri, India - 415615',', Lloyd (1) ',149,'03-Nov-2023','pending');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,10 +142,10 @@ CREATE TABLE `products` (
   `price` int NOT NULL,
   `image` varchar(100) NOT NULL,
   `author` varchar(255) NOT NULL DEFAULT 'Unknown',
-  `description` varchar(255) NOT NULL DEFAULT 'Not defined',
+  `description` varchar(500) DEFAULT NULL,
   `rating` decimal(3,2) NOT NULL DEFAULT '1.00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +154,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Red Queen',100,'red_queen.jpg','Unknown','Not defined',1.00),(2,'Lloyd',149,'lloyd.jpg','Unknown','Not defined',1.00),(3,'The happy lemon',345,'the_happy_lemon.jpg','Unknown','Not defined',1.00),(4,'Nightshade',678,'nightshade.jpg','Unknown','Not defined',1.00),(5,'Freefall',56,'freefall.jpg','Unknown','Not defined',1.00),(6,'Holy ghosts',568,'holy_ghosts.jpg','Unknown','Not defined',1.00),(7,'The world',87,'the_world.jpg','Unknown','Not defined',1.00);
+INSERT INTO `products` VALUES (10,'Bash and Lucy',158,'bash_and_lucy-2.jpg','Lisa and Michael Cohn','\"Bash and Lucy\" is a heartwarming children\'s book that tells the story of a special friendship between a dog named Bash and a young girl named Lucy. It explores themes of companionship, resilience, and the power of friendship. The story highlights the adventures and bond between the two, teaching valuable lessons about love and loyalty.',1.00),(11,'Be Well Bee',900,'be_well_bee.jpg','Dr. Alison Friesen','\"Be Well Bee\" is a comprehensive guide to the health and well-being of honey bees. It provides practical advice on how to keep your bees healthy and productive, and it covers a wide range of topics, including the biology of honey bees, beekeeping basics, bee nutrition and health, bee diseases and pests, and honey bee conservation.',1.00),(12,'Boring Girls',300,'boring_girls_a_novel.jpg','Sara Taylor',' Book name: Boring Girls Author: Sara Taylor Price (INR): 599 Brief description:  Boring Girls is a dark and disturbing novel about two teenage girls who form a heavy metal band and embark on a bloody journey of revenge. Rachel and Fern are both outcasts who have been mistreated by the people around them. They find solace in each other and in their music, but their anger and frustration soon boil over into violence.',1.00),(13,'Red Qeen',195,'red_queen.jpg','Victoria Aveyard','\"Red Queen\" is a captivating fantasy novel set in a world divided by blood — the elite with silver blood possessing superhuman abilities, and the oppressed red-blooded commoners. The story follows Mare Barrow, a Red girl who discovers she has Silver-like abilities, and she becomes embroiled in the dangerous world of the Silvers, where betrayal and power play a significant role. It\'s a tale of rebellion, power struggles, and the fight against societal injustice.',1.00),(14,'Harry Potter and the Sorcerer\'s Stone',150,'harry_potter_ss.jpg','J.K. Rowling','Harry Potter is an orphan boy who lives with his cruel aunt, uncle, and cousin. On his eleventh birthday, he learns that he is a wizard and is invited to attend Hogwarts School of Witchcraft and Wizardry. At Hogwarts, Harry makes new friends, learns about magic, and faces off against the evil Lord Voldemort.',1.00),(15,'The Lord of the Rings: The Fellowship of the Ring',300,'fellowship_of_rings.jpg','J.R.R. Tolkien','Frodo Baggins inherits the One Ring, an evil artifact created by the Dark Lord Sauron. Frodo must set out on a perilous journey to destroy the One Ring in the fires of Mount Doom, the only place where it can be destroyed. Along the way, he is joined by a fellowship of companions who help him on his quest.',1.00),(16,'Algorithms to Live By: The Computer Science of Human Decisions',650,'algorithms_to_live_by.jpg','Brian Christian and Tom Griffiths','In Algorithms to Live By, Brian Christian and Tom Griffiths discuss how computer science can be used to make better decisions in everyday life. They cover topics such as algorithms for finding the best mate, the best job, and the best way to invest your money.',1.00),(17,'Python Crash Course: A Hands-On, Project-Based Introduction to Programming',500,'python_crashcourse.jpg','Eric Matthes','Python Crash Course is a fast-paced introduction to the Python programming language. It covers the basics of Python, such as variables, functions, loops, and data structures, as well as more advanced topics such as object-oriented programming and web development.',1.00),(18,'Algorithms Unlocked',525,'algorithms_unlocked.jpg','Thomas Cormen','Algorithms Unlocked is a gentle introduction to the world of algorithms. It covers the basics of algorithm design and analysis, as well as more advanced topics such as graph algorithms and dynamic programming.',1.00),(19,'The God of Small Things',200,'the_god_of_small_things.jpg','Arundhati Roy',' The God of Small Things is a Booker Prize-winning novel about the lives of two fraternal twins, Rahel and Estha, in Kerala, India. The novel is a lyrical and moving exploration of love, loss, and the power of memory.',1.00);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +171,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +180,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'123','123@123','202cb962ac59075b964b07152d234b70');
+INSERT INTO `users` VALUES (1,'123','123@123','202cb962ac59075b964b07152d234b70'),(2,'New','new@new','827ccb0eea8a706c4c34a16891f84e7b'),(3,'Rushikesh','rushikeshsurve193@gmail.com','827ccb0eea8a706c4c34a16891f84e7b');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -194,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-20 18:50:16
+-- Dump completed on 2023-11-04  1:17:28

@@ -15,6 +15,10 @@ if (isset($_POST['add_product'])) {
 
    $name = mysqli_real_escape_string($conn, $_POST['name']);
    $price = $_POST['price'];
+
+   $author=$_POST['author'];
+   $description=$_POST['description'];
+   $description = str_replace("'", "\\'", $description);
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
@@ -25,7 +29,7 @@ if (isset($_POST['add_product'])) {
    if (mysqli_num_rows($select_product_name) > 0) {
       $message[] = 'Product name already added';
    } else {
-      $add_product_query = mysqli_query($conn, "INSERT INTO `products`(name, price, image) VALUES('$name', '$price', '$image')") or die('Query failed');
+      $add_product_query = mysqli_query($conn, "INSERT INTO `products`(name, price, image,author,description) VALUES('$name', '$price', '$image','$author','$description')") or die('Query failed');
 
       if ($add_product_query) {
          if ($image_size > 2000000) {
@@ -108,8 +112,10 @@ if (isset($_POST['update_product'])) {
 
       <form action="" method="post" enctype="multipart/form-data">
          <h3>Add Product</h3>
-         <input type="text" name="name" class="box" placeholder="Enter product name" required>
-         <input type="number" min="0" name="price" class="box" placeholder="Enter product price" required>
+         <input type="text" name="name" class="box" placeholder="Enter book name" required>
+         <input type="number" min="0" name="price" class="box" placeholder="Enter book price" required>
+         <input type="text" name="author" class="box" placeholder="Name of author" required>
+         <input type="text" name="description" class="box" placeholder="Enter description" required>
          <input type="file" name="image" accept="image/jpg, image/jpeg, image/png" class="box" required>
          <input type="submit" value="add product" name="add_product" class="btn">
       </form>
