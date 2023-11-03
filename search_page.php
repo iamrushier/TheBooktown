@@ -89,7 +89,10 @@ if (isset($_POST['add_to_cart'])) {
                   ?>
                   <form action="" method="post" class="product-card">
                      <div class="product-image">
-                        <img src="images/<?php echo $fetch_products['image']; ?>" alt="<?php echo $fetch_products['name']; ?>">
+                        <a href="selected_product.php?id=<?php echo $fetch_products['id']; ?>">
+                           <img src="images/<?php echo $fetch_products['image']; ?>"
+                              alt="<?php echo $fetch_products['name']; ?>">
+                        </a>
                      </div>
                      <div class="product-details">
                         <h2 class="product-name">

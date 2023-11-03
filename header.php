@@ -1,4 +1,5 @@
 <?php
+/*
 if (isset($message)) {
    foreach ($message as $message) {
       echo '
@@ -9,7 +10,7 @@ if (isset($message)) {
       ';
    }
 }
-
+*/
 //added later
 include 'config.php';
 $l = 0;
