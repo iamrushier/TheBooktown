@@ -207,8 +207,8 @@ if (isset($_POST['add_to_cart'])) {
 
       <div class="content">
          <h3>Have Any Questions?</h3>
-         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque cumque exercitationem repellendus, amet
-            ullam voluptatibus?</p>
+         <p>At "The Booktown," we're all about readers. We make getting your hands on affordable, quality second-hand
+            books a breeze.</p>
          <a href="contact.php" class="white-btn">Contact Us</a>
       </div>
 
@@ -223,8 +223,8 @@ if (isset($_POST['add_to_cart'])) {
    <script>
       var swiper = new Swiper('.swiper-container', {
          slidesPerView: 'auto',
-         freeMode: true, 
-         spaceBetween: 20, 
+         freeMode: true,
+         spaceBetween: 20,
          navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
