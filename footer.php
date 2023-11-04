@@ -27,10 +27,10 @@
 
       <div class="box">
          <h3>Follow Us</h3>
-         <a href="#"> <i class="fab fa-facebook-f"></i> Facebook </a>
-         <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
-         <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
-         <a href="#"> <i class="fab fa-linkedin"></i> LinkedIn </a>
+         <a href="https://www.facebook.com/"> <i class="fab fa-facebook-f"></i> Facebook </a>
+         <a href="https://twitter.com/"> <i class="fab fa-twitter"></i> Twitter </a>
+         <a href="https://www.instagram.com/"> <i class="fab fa-instagram"></i> Instagram </a>
+         <a href="https://www.linkedin.com/"> <i class="fab fa-linkedin"></i> LinkedIn </a>
       </div>
 
    </div>

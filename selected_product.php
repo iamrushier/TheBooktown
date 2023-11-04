@@ -49,6 +49,8 @@ if (isset($_GET['id'])) {
                 <?php echo $fetch_products['name']; ?> - Product Details
             </title>
             <!-- Add your CSS links here -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <link rel="stylesheet" href="css/all.min.css">
             <link rel="stylesheet" href="css/home-styles.css">
             <link rel="stylesheet" href="css/footer.css">
             <link rel="stylesheet" href="css/header.css">
@@ -60,14 +62,11 @@ if (isset($_GET['id'])) {
             <link rel="stylesheet" href="css/cart.css">
             <link rel="stylesheet" href="css/checkout.css">
             <link rel="stylesheet" href="css/selected_product.css">
-            <!-- Additional CSS and other meta tags can be added as needed -->
         </head>
 
         <body>
-            <!-- Your header content -->
             <?php include 'header.php'; ?>
 
-            <!-- Product details display -->
             <div class="product-details">
                 <div class="left-div">
                     <h1>
@@ -94,15 +93,11 @@ if (isset($_GET['id'])) {
                         <button type="submit" name="add_to_cart" class="btn" id="add-to-cart-btn">Add to Cart</button>
                     </form>
                 </div>
-                <!-- You can add more details here based on your database structure -->
             </div>
 
-            <!-- Your footer content -->
             <?php include 'footer.php'; ?>
 
-            <!-- Additional scripts, if any -->
             <script src="js/script.js"></script>
-            <!-- Additional scripts can be included as needed -->
         </body>
 
         </html>

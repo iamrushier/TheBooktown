@@ -1,17 +1,4 @@
 <?php
-/*
-if (isset($message)) {
-   foreach ($message as $message) {
-      echo '
-      <div class="message">
-         <span>' . $message . '</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
-   }
-}
-*/
-//added later
 include 'config.php';
 $l = 0;
 if (isset($_SESSION)) {
@@ -26,7 +13,6 @@ if ($l > 0) {
 ?>
 
 <header class="header">
-   <!--link rel="stylesheet" href="css/header.css"-->
    <div class="flex">
       <div class="logo">
          <a href="home.php" id="shop-name">The Booktown</a>
