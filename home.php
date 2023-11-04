@@ -10,11 +10,6 @@ $user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
-
-//if ($user_id==0) {
-//   header('location:login.php');
-//} // Auto redirect to login page if not signed in
-
 if (isset($_POST['add_to_cart'])) {
    if ($user_id == 0) {
       header('location:login.php');
@@ -45,8 +40,9 @@ if (isset($_POST['add_to_cart'])) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>home</title>
 
-   <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <link rel="stylesheet" href="css/all.min.css">
+   <link rel="stylesheet" href="css/all.min.css">
    <link rel="stylesheet" href="css/swiper-bundle.min.css">
    <link rel="stylesheet" href="css/home-styles.css">
    <link rel="stylesheet" href="css/footer.css">
@@ -101,8 +97,6 @@ if (isset($_POST['add_to_cart'])) {
                                  <?php echo $fetch_products['description']; ?>
                               </p>
                               <div class="product-rating">
-                                 <!-- Add rating system here (e.g., stars, user reviews) -->
-                                 <!-- Example: <span class="star"></span> -->
                               </div>
                            </div>
                            <div class="product-action">
@@ -124,7 +118,6 @@ if (isset($_POST['add_to_cart'])) {
                ?>
             </div>
 
-            <!-- Add pagination and navigation buttons -->
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -159,8 +152,6 @@ if (isset($_POST['add_to_cart'])) {
                                  <?php echo $fetch_products['description']; ?>
                               </p>
                               <div class="product-rating">
-                                 <!-- Add your rating system here (e.g., stars, user reviews) -->
-                                 <!-- Example: <span class="star"></span> -->
                               </div>
                            </div>
                            <div class="product-action">
@@ -182,7 +173,6 @@ if (isset($_POST['add_to_cart'])) {
                ?>
             </div>
 
-            <!-- Add pagination and navigation buttons -->
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -230,12 +220,11 @@ if (isset($_POST['add_to_cart'])) {
 
    <?php include 'footer.php'; ?>
    <script src="js/swiper-bundle.min.js"></script>
-   <!-- custom js file link  -->
    <script>
       var swiper = new Swiper('.swiper-container', {
          slidesPerView: 'auto',
-         freeMode: true, // Enable freemode
-         spaceBetween: 20, // Adjust as needed
+         freeMode: true, 
+         spaceBetween: 20, 
          navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',

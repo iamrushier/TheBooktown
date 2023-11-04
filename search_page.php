@@ -11,10 +11,6 @@ if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
 
-//if ($user_id == 0) {
-//   header('location:login.php');
-//}
-
 if (isset($_POST['add_to_cart'])) {
    if ($user_id == 0) {
       header('location:login.php');
@@ -46,10 +42,8 @@ if (isset($_POST['add_to_cart'])) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Search Page</title>
 
-   <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/all.min.css">
    <link rel="stylesheet" href="css/home-styles.css">
    <link rel="stylesheet" href="css/footer.css">
    <link rel="stylesheet" href="css/header.css">
@@ -105,8 +99,6 @@ if (isset($_POST['add_to_cart'])) {
                            <?php echo $fetch_products['description']; ?>
                         </p>
                         <div class="product-rating">
-                           <!-- Add your rating system here (e.g., stars, user reviews) -->
-                           <!-- Example: <span class="star"></span> -->
                         </div>
                      </div>
                      <div class="product-action">
