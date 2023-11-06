@@ -1,0 +1,105 @@
+
+.sell-request {
+    margin:40px auto;
+    margin-top: 100px !important;
+    text-align: center;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sell-request h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.sell-request form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sell-request .box {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.sell-request input[type="submit"] {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #336699;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sell-request input[type="submit"]:hover {
+    background-color: #264d73;
+}
+
+/* Box container style */
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Individual box style */
+.box {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Book name style */
+.box p:nth-child(1) {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Book image style */
+.box img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Price style */
+.box p:nth-child(3) {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Description style */
+.box p:nth-child(4) {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Request Status style */
+.box p:nth-child(5) {
+    font-weight: bold;
+}
+
+/* Styling the color based on request status */
+.box p:nth-child(5) span {
+    padding: 5px 10px;
+    border-radius: 20px;
+}
