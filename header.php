@@ -23,6 +23,7 @@ if ($l > 0) {
          <a href="shop.php">Shop</a>
          <a href="contact.php">Contact</a>
          <a href="orders.php">Orders</a>
+         <a href="sell_request.php">Sell</a>
       </nav>
 
       <div class="icons">

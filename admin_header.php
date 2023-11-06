@@ -20,6 +20,7 @@ if (isset($message)) {
          <a href="admin_orders.php">Orders</a>
          <a href="admin_users.php">Users</a>
          <a href="admin_contacts.php">Messages</a>
+         <a href="admin_sell_requests.php">Sell requests</a>
       </nav>
       <div class="icons">
          <div id="menu-btn" class="fas fa-bars"></div>
