@@ -3,22 +3,34 @@ include 'config.php';
 session_start();
 $admin_id = $_SESSION['admin_id'];
 
-if (!isset($admin_id)) {
+if (!isset ($admin_id)) {
     header('location:login.php');
     exit();
 }
 
-if (isset($_POST['update_request_status'])) {
+if (isset ($_POST['update_request_status'])) {
     $request_id = $_POST['request_id'];
     $new_status = $_POST['new_status'];
 
     $update_query = "UPDATE sell_requests SET request_status = '$new_status' WHERE request_id = '$request_id'";
-    mysqli_query($conn, $update_query) or die('Query failed');
+    mysqli_query($conn, $update_query) or die ('Query failed');
+
+    if ($new_status == "approved") {
+        $get_data = mysqli_query($conn, "SELECT * FROM `sell_requests` WHERE request_id = '$request_id'") or die ('Query failed');
+        $fetched_data = mysqli_fetch_assoc($get_data);
+        $name = $fetched_data['name'];
+        $price = $fetched_data['price'];
+        $description = $fetched_data['description'];
+        $image = $fetched_data['image'];
+        $author = $fetched_data['author'];
+        $add_product_query = mysqli_query($conn, "INSERT INTO `products`(name, price, image,author,description) VALUES('$name', '$price', '$image','$author','$description')") or die ('Query failed');
+    }
+
 }
 
-if (isset($_GET['delete'])) {
+if (isset ($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    mysqli_query($conn, "DELETE FROM `sell_requests` WHERE request_id = '$delete_id'") or die('Query failed');
+    mysqli_query($conn, "DELETE FROM `sell_requests` WHERE request_id = '$delete_id'") or die ('Query failed');
     header('location:admin_sell_requests.php');
 }
 ?>
@@ -46,7 +58,7 @@ if (isset($_GET['delete'])) {
         <h1 class="title">Sell Requests</h1>
         <div class="request-box-container">
             <?php
-            $select_requests = mysqli_query($conn, "SELECT * FROM `sell_requests`") or die('Query failed');
+            $select_requests = mysqli_query($conn, "SELECT * FROM `sell_requests`") or die ('Query failed');
             if (mysqli_num_rows($select_requests) > 0) {
                 while ($fetch_requests = mysqli_fetch_assoc($select_requests)) {
                     ?>
@@ -83,8 +95,8 @@ if (isset($_GET['delete'])) {
                             </select>
                             <input type="submit" value="Update" name="update_request_status" class="option-btn">
                             <div style="width:100%;text-align:center;" class="delete-btn"><a
-                                href="admin_sell_requests.php?delete=<?php echo $fetch_requests['request_id']; ?>"
-                                onclick="return confirm('Delete this request?');" >Delete</a></div>
+                                    href="admin_sell_requests.php?delete=<?php echo $fetch_requests['request_id']; ?>"
+                                    onclick="return confirm('Delete this request?');">Delete</a></div>
                         </form>
                     </div>
                     <?php
