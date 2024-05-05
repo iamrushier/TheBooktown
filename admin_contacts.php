@@ -5,10 +5,10 @@ $admin_id = $_SESSION['admin_id'];
 if (!isset($admin_id)) {
    header('location:login.php');
 }
-;
+
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
-   mysqli_query($conn, "DELETE FROM `message` WHERE id = '$delete_id'") or die('Query failed');
+   $conn->exec("DELETE FROM message WHERE id = '$delete_id'") or die('Query failed');
    header('location:admin_contacts.php');
 }
 ?>
@@ -35,9 +35,9 @@ if (isset($_GET['delete'])) {
       <h1 class="title"> Messages </h1>
       <div class="box-container">
          <?php
-         $select_message = mysqli_query($conn, "SELECT * FROM `message`") or die('Query failed');
-         if (mysqli_num_rows($select_message) > 0) {
-            while ($fetch_message = mysqli_fetch_assoc($select_message)) {
+         $select_message = $conn->query("SELECT * FROM message") or die('Query failed');
+         if ($select_message->numColumns() > 0) {
+            while ($fetch_message = $select_message->fetchArray(SQLITE3_ASSOC)) {
                ?>
 
                <div class="box">
@@ -62,7 +62,6 @@ if (isset($_GET['delete'])) {
 
                <?php
             }
-            ;
          } else {
             echo '<p class="empty">You have no messages!</p>';
          }

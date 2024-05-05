@@ -18,18 +18,23 @@ if (isset($_POST['send_request'])) {
         header('location:login.php');
     }
 
-    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $name = $_POST['name'];
     $price = $_POST['price'];
-    $author= mysqli_real_escape_string($conn,$_POST['author']);
-    $description = mysqli_real_escape_string($conn, $_POST['description']);
+    $author= $_POST['author'];
+    $description = $_POST['description'];
     $image = $_FILES['image']['name'];
     $image_tmp_name = $_FILES['image']['tmp_name'];
     $image_folder = 'images/' . $image;
 
+    $insert_query = $conn->prepare("INSERT INTO sell_requests (user_id, name, price, author, description, image) VALUES (:user_id, :name, :price, :author, :description, :image)");
+    $insert_query->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+    $insert_query->bindParam(':name', $name, SQLITE3_TEXT);
+    $insert_query->bindParam(':price', $price, SQLITE3_INTEGER);
+    $insert_query->bindParam(':author', $author, SQLITE3_TEXT);
+    $insert_query->bindParam(':description', $description, SQLITE3_TEXT);
+    $insert_query->bindParam(':image', $image, SQLITE3_TEXT);
 
-    $insert_query = "INSERT INTO sell_requests (user_id, name, price,author, description, image) VALUES ('$user_id', '$name', '$price', '$author','$description', '$image')";
-
-    if (mysqli_query($conn, $insert_query)) {
+    if ($insert_query->execute()) {
         // Upload the image to a folder
         move_uploaded_file($image_tmp_name, $image_folder);
         $message = 'Sell request sent successfully!';
@@ -82,9 +87,11 @@ if (isset($_POST['send_request'])) {
     <div style="font-size:20px; font-weight:bold; text-align: center;">My requests:</div>
     <div class="box-container">
         <?php
-        $request_query = mysqli_query($conn, "SELECT * FROM `sell_requests` WHERE user_id = '$user_id'") or die('query failed');
-        if (mysqli_num_rows($request_query) > 0) {
-            while ($fetch_orders = mysqli_fetch_assoc($request_query)) {
+        $request_query = $conn->prepare("SELECT * FROM sell_requests WHERE user_id = :user_id");
+        $request_query->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+        $result = $request_query->execute();
+        if ($result) {
+            while ($fetch_orders = $result->fetchArray(SQLITE3_ASSOC)) {
                 ?>
                 <div class="box">
                     <p> Book name : <span>
@@ -105,11 +112,7 @@ if (isset($_POST['send_request'])) {
                         </span> </p>
 
                     <p> Request Status :
-                        <span style="color:<?php if ($fetch_orders['request_status'] == 'pending') {
-                            echo 'red';
-                        } else {
-                            echo 'green';
-                        } ?>;">
+                        <span style="color:<?php echo ($fetch_orders['request_status'] == 'pending') ? 'red' : 'green'; ?>;">
                             <?php echo $fetch_orders['request_status']; ?>
                         </span>
                     </p>

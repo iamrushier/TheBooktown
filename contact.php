@@ -1,34 +1,49 @@
 <?php
 
 include 'config.php';
+
 session_start();
-$l=0;
+$l = 0;
 foreach ($_SESSION as $key => $val) {
    $l++;
 }
-$user_id=0;
+$user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
 
 if (isset($_POST['send'])) {
-   if ($user_id==0) {
-      header('location:login.php');
-   }
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   if ($user_id == 0) {
+        header('location:login.php');
+        exit(); // Added exit to stop execution after redirection
+    }
+   $name = $_POST['name'];
+   $email = $_POST['email'];
    $number = $_POST['number'];
-   $msg = mysqli_real_escape_string($conn, $_POST['message']);
+   $msg = $_POST['message'];
 
-   $select_message = mysqli_query($conn, "SELECT * FROM `message` WHERE name = '$name' AND email = '$email' AND number = '$number' AND message = '$msg'") or die('query failed');
+   $select_message = $conn->prepare("SELECT * FROM message WHERE name = ? AND email = ? AND number = ? AND message = ?");
+   $select_message->bindParam(1, $name, SQLITE3_TEXT);
+   $select_message->bindParam(2, $email, SQLITE3_TEXT);
+   $select_message->bindParam(3, $number, SQLITE3_TEXT);
+   $select_message->bindParam(4, $msg, SQLITE3_TEXT);
+   $result = $select_message->execute();
 
-   if (mysqli_num_rows($select_message) > 0) {
+   if ($result->fetchArray(SQLITE3_ASSOC)) {
       $message[] = 'Message sent already!';
    } else {
-      mysqli_query($conn, "INSERT INTO `message`(user_id, name, email, number, message) VALUES('$user_id', '$name', '$email', '$number', '$msg')") or die('query failed');
-      $message[] = 'Message sent successfully!';
+      $insert_message = $conn->prepare("INSERT INTO message (user_id, name, email, number, message) VALUES (?, ?, ?, ?, ?)");
+      $insert_message->bindParam(1, $user_id, SQLITE3_INTEGER);
+      $insert_message->bindParam(2, $name, SQLITE3_TEXT);
+      $insert_message->bindParam(3, $email, SQLITE3_TEXT);
+      $insert_message->bindParam(4, $number, SQLITE3_TEXT);
+      $insert_message->bindParam(5, $msg, SQLITE3_TEXT);
+      if ($insert_message->execute()) {
+         $message[] = 'Message sent successfully!';
+      } else {
+         $message[] = 'Failed to send message!';
+      }
    }
-
 }
 
 ?>
@@ -75,12 +90,13 @@ if (isset($_POST['send'])) {
 
    </section>
 
-
-
-
-
-
-
+   <?php
+   if (isset($message)) {
+      foreach ($message as $msg) {
+         echo "<p>$msg</p>";
+      }
+   }
+   ?>
 
    <?php include 'footer.php'; ?>
 

@@ -1,11 +1,11 @@
 <?php
 include 'config.php';
 session_start();
-$l=0;
+$l = 0;
 foreach ($_SESSION as $key => $val) {
    $l++;
 }
-$user_id=0;
+$user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }

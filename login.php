@@ -5,21 +5,27 @@ session_start();
 
 if (isset($_POST['submit'])) {
 
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+   $email = $_POST['email'];
+   $pass = md5($_POST['password']);
 
-   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
+   $select_users = $conn->prepare("SELECT * FROM users WHERE email = ? AND password = ?");
+   $select_users->bindParam(1, $email, SQLITE3_TEXT);
+   $select_users->bindParam(2, $pass, SQLITE3_TEXT);
+   $result = $select_users->execute();
 
-   if (mysqli_num_rows($select_users) > 0) {
-
-      $row = mysqli_fetch_assoc($select_users);
-      $_SESSION['user_name'] = $row['name'];
-      $_SESSION['user_email'] = $row['email'];
-      $_SESSION['user_id'] = $row['id'];
-      header('location:home.php');
-
+   if ($result) {
+      $row = $result->fetchArray(SQLITE3_ASSOC);
+      if ($row) {
+         $_SESSION['user_name'] = $row['name'];
+         $_SESSION['user_email'] = $row['email'];
+         $_SESSION['user_id'] = $row['id'];
+         header('location:home.php');
+         exit(); // Added exit to stop further execution after redirection
+      } else {
+         $message[] = 'Incorrect Email or Password!';
+      }
    } else {
-      $message[] = 'Incorrect Email or Password!';
+      $message[] = 'Query failed';
    }
 
 }
@@ -42,7 +48,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-<?php include 'header.php'; ?>
+   <?php include 'header.php'; ?>
    <div class="form-container">
 
       <form action="" method="post" class="login-box">
@@ -52,10 +58,10 @@ if (isset($_POST['submit'])) {
          </div>
          <?php
          if (isset($message)) {
-            foreach ($message as $message) {
+            foreach ($message as $msg) {
                echo '
 			<div style="text-align:left;font-size:17px; color:red;margin-top:5px;margin-bottom:0px;">
-				<span>' . $message . '</span>
+				<span>' . $msg . '</span>
 				<i class="fas fa-times" onclick="this.parentElement.remove();"></i>
 			</div>
 			';

@@ -1,20 +1,21 @@
 <?php
 
 include 'config.php';
+
 session_start();
-$l=0;
+$l = 0;
 foreach ($_SESSION as $key => $val) {
    $l++;
 }
-$user_id=0;
+$user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
 
-if ($user_id==0) {
+if ($user_id == 0) {
    header('location:login.php');
+   exit(); // Added exit to stop execution after redirection
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -54,9 +55,12 @@ if ($user_id==0) {
       <div class="box-container">
 
          <?php
-         $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE user_id = '$user_id'") or die('query failed');
-         if (mysqli_num_rows($order_query) > 0) {
-            while ($fetch_orders = mysqli_fetch_assoc($order_query)) {
+         $order_query = $conn->prepare("SELECT * FROM orders WHERE user_id = ?");
+         $order_query->bindParam(1, $user_id, SQLITE3_INTEGER);
+         $result = $order_query->execute();
+
+         if ($result) {
+            while ($fetch_orders = $result->fetchArray(SQLITE3_ASSOC)) {
                ?>
                <div class="box">
                   <p> Placed on : <span>
@@ -83,11 +87,8 @@ if ($user_id==0) {
                   <p> Total Price : <span>$
                         <?php echo $fetch_orders['total_price']; ?>/-
                      </span> </p>
-                  <p> Payment Status : <span style="color:<?php if ($fetch_orders['payment_status'] == 'pending') {
-                     echo 'red';
-                  } else {
-                     echo 'green';
-                  } ?>;">
+                  <p> Payment Status : <span
+                        style="color:<?php echo $fetch_orders['payment_status'] == 'pending' ? 'red' : 'green'; ?>;">
                         <?php echo $fetch_orders['payment_status']; ?>
                      </span> </p>
                </div>
@@ -100,13 +101,6 @@ if ($user_id==0) {
       </div>
 
    </section>
-
-
-
-
-
-
-
 
    <?php include 'footer.php'; ?>
 

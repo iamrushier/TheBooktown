@@ -1,32 +1,36 @@
 <?php
 
 include 'config.php';
+
 session_start();
-$l=0;
+$l = 0;
 foreach ($_SESSION as $key => $val) {
    $l++;
 }
-$user_id=0;
+$user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
-
-if ($user_id==0) {
+if ($user_id == 0) {
    header('location:login.php');
+   exit(); // Added exit to stop execution after redirection
 }
 if (isset($_POST['order_btn'])) {
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $name = $_POST['name'];
    $number = $_POST['number'];
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $method = mysqli_real_escape_string($conn, $_POST['method']);
-   $address = mysqli_real_escape_string($conn, 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code']);
+   $email = $_POST['email'];
+   $method = $_POST['method'];
+   $address = 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
    $placed_on = date('d-M-Y');
 
    $cart_total = 0;
-   $cart_products[] = '';
-   $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('Query failed');
-   if (mysqli_num_rows($cart_query) > 0) {
-      while ($cart_item = mysqli_fetch_assoc($cart_query)) {
+   $cart_products = [];
+   $cart_query = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
+   $cart_query->bindParam(1, $user_id, SQLITE3_INTEGER);
+   $result = $cart_query->execute();
+
+   if ($result) {
+      while ($cart_item = $result->fetchArray(SQLITE3_ASSOC)) {
          $cart_products[] = $cart_item['name'] . ' (' . $cart_item['quantity'] . ') ';
          $sub_total = ($cart_item['price'] * $cart_item['quantity']);
          $cart_total += $sub_total;
@@ -35,17 +39,40 @@ if (isset($_POST['order_btn'])) {
 
    $total_products = implode(', ', $cart_products);
 
-   $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$cart_total'") or die('Query failed');
+   $order_query = $conn->prepare("SELECT * FROM orders WHERE name = ? AND number = ? AND email = ? AND method = ? AND address = ? AND total_products = ? AND total_price = ?");
+   $order_query->bindParam(1, $name, SQLITE3_TEXT);
+   $order_query->bindParam(2, $number, SQLITE3_TEXT);
+   $order_query->bindParam(3, $email, SQLITE3_TEXT);
+   $order_query->bindParam(4, $method, SQLITE3_TEXT);
+   $order_query->bindParam(5, $address, SQLITE3_TEXT);
+   $order_query->bindParam(6, $total_products, SQLITE3_TEXT);
+   $order_query->bindParam(7, $cart_total, SQLITE3_INTEGER);
+   $result = $order_query->execute();
 
    if ($cart_total == 0) {
       $message[] = 'Your cart is empty';
    } else {
-      if (mysqli_num_rows($order_query) > 0) {
+      if ($result && $result->fetchArray(SQLITE3_ASSOC)) {
          $message[] = 'Order already placed!';
       } else {
-         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('Query failed');
-         $message[] = 'Order Placed Successfully!';
-         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('Query failed');
+         $insert_order = $conn->prepare("INSERT INTO orders(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+         $insert_order->bindParam(1, $user_id, SQLITE3_INTEGER);
+         $insert_order->bindParam(2, $name, SQLITE3_TEXT);
+         $insert_order->bindParam(3, $number, SQLITE3_TEXT);
+         $insert_order->bindParam(4, $email, SQLITE3_TEXT);
+         $insert_order->bindParam(5, $method, SQLITE3_TEXT);
+         $insert_order->bindParam(6, $address, SQLITE3_TEXT);
+         $insert_order->bindParam(7, $total_products, SQLITE3_TEXT);
+         $insert_order->bindParam(8, $cart_total, SQLITE3_INTEGER);
+         $insert_order->bindParam(9, $placed_on, SQLITE3_TEXT);
+         if ($insert_order->execute()) {
+            $message[] = 'Order Placed Successfully!';
+            $delete_cart = $conn->prepare("DELETE FROM cart WHERE user_id = ?");
+            $delete_cart->bindParam(1, $user_id, SQLITE3_INTEGER);
+            $delete_cart->execute();
+         } else {
+            $message[] = 'Failed to place order';
+         }
       }
    }
    header('Location: orders.php');
@@ -61,7 +88,7 @@ if (isset($_POST['order_btn'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>checkout</title>
+   <title>Checkout</title>
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <link rel="stylesheet" href="css/all.min.css">
@@ -91,9 +118,12 @@ if (isset($_POST['order_btn'])) {
 
       <?php
       $grand_total = 0;
-      $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-      if (mysqli_num_rows($select_cart) > 0) {
-         while ($fetch_cart = mysqli_fetch_assoc($select_cart)) {
+      $select_cart = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
+      $select_cart->bindParam(1, $user_id, SQLITE3_INTEGER);
+      $result = $select_cart->execute();
+
+      if ($result) {
+         while ($fetch_cart = $result->fetchArray(SQLITE3_ASSOC)) {
             $total_price = ($fetch_cart['price'] * $fetch_cart['quantity']);
             $grand_total += $total_price;
             ?>
@@ -166,12 +196,10 @@ if (isset($_POST['order_btn'])) {
             </div>
 
          </div>
-         <div class="center-solo"><input type="submit" value="order now" class="btn" name="order_btn"></div>
+         <div class="center-solo"><input type="submit" value="Order Now" class="btn" name="order_btn"></div>
       </form>
 
    </section>
-
-
 
    <?php include 'footer.php'; ?>
 
