@@ -2,30 +2,36 @@
 
 include 'config.php';
 session_start();
-$l = 0;
-foreach ($_SESSION as $key => $val) {
-   $l++;
-}
-$user_id = 0;
-if ($l > 0) {
-   $user_id = $_SESSION['user_id'];
-}
+$l = count($_SESSION);
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
 
 if (isset($_POST['add_to_cart'])) {
    if ($user_id == 0) {
       header('location:login.php');
+      exit(); // Added to stop execution after redirection
    } else {
       $product_name = $_POST['product_name'];
       $product_price = $_POST['product_price'];
       $product_image = $_POST['product_image'];
 
-      $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
+      $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
+      $check_cart_numbers->bindParam(1, $product_name, SQLITE3_TEXT);
+      $check_cart_numbers->bindParam(2, $user_id, SQLITE3_INTEGER);
+      $result = $check_cart_numbers->execute();
 
-      if (mysqli_num_rows($check_cart_numbers) > 0) {
+      if ($result->fetchArray(SQLITE3_ASSOC)) {
          $message[] = 'Already added to cart!';
       } else {
-         mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '1', '$product_image')") or die('query failed');
-         $message[] = 'Product added to cart!';
+         $insert_cart = $conn->prepare("INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES(?, ?, ?, '1', ?)");
+         $insert_cart->bindParam(1, $user_id, SQLITE3_INTEGER);
+         $insert_cart->bindParam(2, $product_name, SQLITE3_TEXT);
+         $insert_cart->bindParam(3, $product_price, SQLITE3_INTEGER);
+         $insert_cart->bindParam(4, $product_image, SQLITE3_TEXT);
+         if ($insert_cart->execute()) {
+            $message[] = 'Product added to cart!';
+         } else {
+            $message[] = 'Failed to add product to cart!';
+         }
       }
    }
 }
@@ -68,9 +74,9 @@ if (isset($_POST['add_to_cart'])) {
       <div class="box-container">
 
          <?php
-         $select_products = mysqli_query($conn, "SELECT * FROM `products`") or die('query failed');
-         if (mysqli_num_rows($select_products) > 0) {
-            while ($fetch_products = mysqli_fetch_assoc($select_products)) {
+         $select_products = $conn->query("SELECT * FROM `products`");
+         if ($select_products) {
+            while ($fetch_products = $select_products->fetchArray(SQLITE3_ASSOC)) {
                ?>
                <form action="" method="post" class="product-card">
 
@@ -112,9 +118,6 @@ if (isset($_POST['add_to_cart'])) {
       </div>
 
    </section>
-
-
-
 
    <?php include 'footer.php'; ?>
 

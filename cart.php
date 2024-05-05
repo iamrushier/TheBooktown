@@ -11,7 +11,6 @@ if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
 
-
 if ($user_id == 0) {
    header('location:login.php');
 }
@@ -19,19 +18,40 @@ if ($user_id == 0) {
 if (isset($_POST['update_cart'])) {
    $cart_id = $_POST['cart_id'];
    $cart_quantity = $_POST['cart_quantity'];
-   mysqli_query($conn, "UPDATE `cart` SET quantity = '$cart_quantity' WHERE id = '$cart_id'") or die('Query failed');
-   $message[] = 'Cart quantity updated!';
+   $update_cart = $conn->prepare("UPDATE cart SET quantity = :cart_quantity WHERE id = :cart_id");
+   $update_cart->bindParam(':cart_quantity', $cart_quantity, SQLITE3_INTEGER);
+   $update_cart->bindParam(':cart_id', $cart_id, SQLITE3_INTEGER);
+   $result = $update_cart->execute();
+   if ($result) {
+      $message[] = 'Cart quantity updated!';
+   } else {
+      $message[] = 'Failed to update cart quantity';
+   }
 }
 
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
-   mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$delete_id'") or die('Query failed');
-   header('location:cart.php');
+   $delete_cart = $conn->prepare("DELETE FROM cart WHERE id = :delete_id");
+   $delete_cart->bindParam(':delete_id', $delete_id, SQLITE3_INTEGER);
+   $result = $delete_cart->execute();
+   if ($result) {
+      header('location:cart.php');
+      exit();
+   } else {
+      $message[] = 'Failed to delete item from cart';
+   }
 }
 
 if (isset($_GET['delete_all'])) {
-   mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('Query failed');
-   header('location:cart.php');
+   $delete_all = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
+   $delete_all->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+   $result = $delete_all->execute();
+   if ($result) {
+      header('location:cart.php');
+      exit();
+   } else {
+      $message[] = 'Failed to delete all items from cart';
+   }
 }
 
 ?>
@@ -75,9 +95,11 @@ if (isset($_GET['delete_all'])) {
       <div class="box-container">
          <?php
          $grand_total = 0;
-         $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('Query failed');
-         if (mysqli_num_rows($select_cart) > 0) {
-            while ($fetch_cart = mysqli_fetch_assoc($select_cart)) {
+         $select_cart = $conn->prepare("SELECT * FROM cart WHERE user_id = :user_id");
+         $select_cart->bindParam(':user_id', $user_id, SQLITE3_INTEGER);
+         $result = $select_cart->execute();
+         if ($result) {
+            while ($fetch_cart = $result->fetchArray(SQLITE3_ASSOC)) {
                ?>
                <div class="box">
                   <a href="cart.php?delete=<?php echo $fetch_cart['id']; ?>" class="fas fa-times"
@@ -125,9 +147,6 @@ if (isset($_GET['delete_all'])) {
       </div>
 
    </section>
-
-
-
 
    <?php include 'footer.php'; ?>
 

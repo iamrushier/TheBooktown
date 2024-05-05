@@ -30,8 +30,13 @@ if ($l > 0) {
          <a href="search_page.php" class="fas fa-search"></a>
          <div id="user-btn" class="fas fa-user"></div>
          <?php
-         $select_cart_number = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-         $cart_rows_number = mysqli_num_rows($select_cart_number);
+         $select_cart_number = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
+         $select_cart_number->bindParam(1, $user_id, SQLITE3_INTEGER);
+         $result = $select_cart_number->execute();
+         $cart_rows_number = 0;
+         while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+            $cart_rows_number++;
+         }
          ?>
          <a href="cart.php"><i class="fas fa-shopping-cart"></i>
             <span>(

@@ -32,15 +32,12 @@ if (!isset($admin_id)) {
 
             <?php
             $total_pendings = 0;
-            $select_pending = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'pending'") or die('Query failed');
-            if (mysqli_num_rows($select_pending) > 0) {
-               while ($fetch_pendings = mysqli_fetch_assoc($select_pending)) {
-                  $total_price = $fetch_pendings['total_price'];
-                  $total_pendings += $total_price;
-               }
-               ;
+            $stmt = $conn->prepare("SELECT total_price FROM orders WHERE payment_status = 'pending'");
+            $result = $stmt->execute();
+            while ($fetch_pendings = $result->fetchArray(SQLITE3_ASSOC)) {
+               $total_price = $fetch_pendings['total_price'];
+               $total_pendings += $total_price;
             }
-            ;
             ?>
 
             <h3>$
@@ -53,15 +50,12 @@ if (!isset($admin_id)) {
 
             <?php
             $total_completed = 0;
-            $select_completed = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'completed'") or die('Query failed');
-            if (mysqli_num_rows($select_completed) > 0) {
-               while ($fetch_completed = mysqli_fetch_assoc($select_completed)) {
-                  $total_price = $fetch_completed['total_price'];
-                  $total_completed += $total_price;
-               }
-               ;
+            $stmt = $conn->prepare("SELECT total_price FROM orders WHERE payment_status = 'completed'");
+            $result = $stmt->execute();
+            while ($fetch_completed = $result->fetchArray(SQLITE3_ASSOC)) {
+               $total_price = $fetch_completed['total_price'];
+               $total_completed += $total_price;
             }
-            ;
             ?>
 
             <h3>$
@@ -72,8 +66,12 @@ if (!isset($admin_id)) {
          <div class="box">
 
             <?php
-            $select_orders = mysqli_query($conn, "SELECT * FROM `orders`") or die('Query failed');
-            $number_of_orders = mysqli_num_rows($select_orders);
+            $stmt = $conn->prepare("SELECT * FROM orders");
+            $result = $stmt->execute();
+            $number_of_orders = 0;
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+               $number_of_orders++;
+            }
             ?>
 
             <h3>
@@ -84,8 +82,12 @@ if (!isset($admin_id)) {
 
          <div class="box">
             <?php
-            $select_products = mysqli_query($conn, "SELECT * FROM `products`") or die('Query failed');
-            $number_of_products = mysqli_num_rows($select_products);
+            $stmt = $conn->prepare("SELECT * FROM products");
+            $result = $stmt->execute();
+            $number_of_products = 0;
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+               $number_of_products++;
+            }
             ?>
 
             <h3>
@@ -96,8 +98,12 @@ if (!isset($admin_id)) {
 
          <div class="box">
             <?php
-            $select_users = mysqli_query($conn, "SELECT * FROM `users`") or die('Query failed');
-            $number_of_users = mysqli_num_rows($select_users);
+            $stmt = $conn->prepare("SELECT * FROM users");
+            $result = $stmt->execute();
+            $number_of_users = 0;
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+               $number_of_users++;
+            }
             ?>
 
             <h3>
@@ -109,8 +115,12 @@ if (!isset($admin_id)) {
 
          <div class="box">
             <?php
-            $select_messages = mysqli_query($conn, "SELECT * FROM `message`") or die('Query failed');
-            $number_of_messages = mysqli_num_rows($select_messages);
+            $stmt = $conn->prepare("SELECT * FROM message");
+            $result = $stmt->execute();
+            $number_of_messages = 0;
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+               $number_of_messages++;
+            }
             ?>
             <h3>
                <?php echo $number_of_messages; ?>
