@@ -7,7 +7,9 @@ foreach ($_SESSION as $key => $val) {
 }
 $user_id = 0;
 if ($l > 0) {
-   $user_id = $_SESSION['user_id'];
+   if (isset($_SESSION['user_id'])) {
+      $user_id = $_SESSION['user_id'];
+   }
 }
 if (isset($_POST['add_to_cart'])) {
    if ($user_id == 0) {

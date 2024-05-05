@@ -11,12 +11,11 @@ $user_id = 0;
 if ($l > 0) {
    $user_id = $_SESSION['user_id'];
 }
-
+if ($user_id == 0) {
+   header('location:login.php');
+   exit(); // Added exit to stop execution after redirection
+}
 if (isset($_POST['send'])) {
-   if ($user_id == 0) {
-        header('location:login.php');
-        exit(); // Added exit to stop execution after redirection
-    }
    $name = $_POST['name'];
    $email = $_POST['email'];
    $number = $_POST['number'];
