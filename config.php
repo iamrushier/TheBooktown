@@ -1,6 +1,6 @@
 <?php
 // Specify the SQLite database file path
-$db_path = 'C:/Users/Rushikesh/shop_db.sqlite3';
+$db_path = 'database/shop_db.sqlite3';
 
 // Create a new SQLite3 connection
 $conn = new SQLite3($db_path);
