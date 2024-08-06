@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
          $email_api = require ('email-api.php');
-         $mailAPIKey = $email_api['api_key'];
+         $emailAPIKey = $email_api['api_key'];
          
          $sendgrid = new SendGrid($emailAPIKey);
 
