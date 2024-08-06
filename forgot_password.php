@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,6 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          <?php if (isset($success)) { ?>
             <div class="success"><?php echo $success; ?></div>
          <?php } ?>
+         <?php if (isset($error)) { ?>
+            <div class="error"><?php echo $error; ?></div>
+         <?php } ?>
+         <?php if (isset($success)) { ?>
+            <div class="success"><?php echo $success; ?></div>
+         <?php } ?>
          <input type="email" name="email" placeholder="Enter your Email" required class="box">
          <div style="text-align:right;">
             <p style="font-size:14px; margin-top:0px;padding-top:0px;"><a href="login.php">Back to Login</a></p>
@@ -90,5 +95,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </form>
    </div>
 </body>
-
 </html>
