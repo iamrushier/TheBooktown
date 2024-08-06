@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          require 'vendor/autoload.php'; // Include SendGrid PHP library
 
 
-         $email_api = require ('/path/to/api_config.php');
+         $email_api = require ('email-api.php');
          $mailAPIKey = $email_api['api_key'];
          
          $sendgrid = new SendGrid($emailAPIKey);
