@@ -2,60 +2,64 @@
 include 'config.php'; // Include your database configuration file
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
+   $email = $_POST['email'];
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Invalid email format';
-    } else {
-        // Check if the email exists in the database
-        $check_email_query = $conn->prepare("SELECT * FROM users WHERE email = ?");
-        $check_email_query->bindParam(1, $email, SQLITE3_TEXT);
-        $result = $check_email_query->execute();
+   // Validate email format
+   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $error = 'Invalid email format';
+   } else {
+      // Check if the email exists in the database
+      $check_email_query = $conn->prepare("SELECT * FROM users WHERE email = ?");
+      $check_email_query->bindParam(1, $email, SQLITE3_TEXT);
+      $result = $check_email_query->execute();
 
-        if ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-            // Generate a unique token
-            $token = bin2hex(random_bytes(32)); // Generate a 32-byte random token (64 characters in hex format)
-            $token_expiry = time() + (60 * 60); // Token expiry time (1 hour from now)
+      if ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+         // Generate a unique token
+         $token = bin2hex(random_bytes(32)); // Generate a 32-byte random token (64 characters in hex format)
+         $token_expiry = time() + (60 * 60); // Token expiry time (1 hour from now)
 
-            // Store the token and expiry time in the database
-            $insert_token_query = $conn->prepare("INSERT INTO password_reset_requests (email, token, expiry_time) VALUES (?, ?, ?)");
-            $insert_token_query->bindParam(1, $email, SQLITE3_TEXT);
-            $insert_token_query->bindParam(2, $token, SQLITE3_TEXT);
-            $insert_token_query->bindParam(3, $token_expiry, SQLITE3_INTEGER);
-            $insert_token_query->execute();
+         // Store the token and expiry time in the database
+         $insert_token_query = $conn->prepare("INSERT INTO password_reset_requests (email, token, expiry_time) VALUES (?, ?, ?)");
+         $insert_token_query->bindParam(1, $email, SQLITE3_TEXT);
+         $insert_token_query->bindParam(2, $token, SQLITE3_TEXT);
+         $insert_token_query->bindParam(3, $token_expiry, SQLITE3_INTEGER);
+         $insert_token_query->execute();
 
-            // Send reset password email using SendGrid API
-            require 'vendor/autoload.php'; // Include SendGrid PHP library
+         // Send reset password email using SendGrid API
+         require 'vendor/autoload.php'; // Include SendGrid PHP library
 
-            $emailAPIKey = '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'; // Replace with your SendGrid API key
-            $sendgrid = new SendGrid($emailAPIKey);
 
-            $resetLink = 'http://localhost/TheBooktown/reset_password.php?token=' . $token;
-            $to = $email;
-            $subject = 'Reset Your Password';
-            $message = 'Dear user,<br><br>Please click the link below to reset your password:<br><a href="' . $resetLink . '">Reset Password</a><br><br>If you did not request this, please ignore this email.<br><br>Best regards,<br>Your Website Team';
-            $email = new SendGrid\Mail\Mail();
-            $email->setFrom("rushikeshsurve193@gmail.com", "Rushikesh Surve");
-            $email->setSubject($subject);
-            $email->addTo($to);
-            $email->addContent("text/html", $message);
+         $email_api = require ('/path/to/api_config.php');
+         $mailAPIKey = $email_api['api_key'];
+         
+         $sendgrid = new SendGrid($emailAPIKey);
 
-            try {
-                $response = $sendgrid->send($email);
-                $success = 'An email has been sent with instructions to reset your password.';
-            } catch (Exception $e) {
-                $error = 'Error sending email: ' . $e->getMessage();
-            }
-        } else {
-            $error = 'Email address not found.';
-        }
-    }
+         $resetLink = 'http://localhost/TheBooktown/reset_password.php?token=' . $token;
+         $to = $email;
+         $subject = 'Reset Your Password';
+         $message = 'Dear user,<br><br>Please click the link below to reset your password:<br><a href="' . $resetLink . '">Reset Password</a><br><br>If you did not request this, please ignore this email.<br><br>Best regards,<br>Your Website Team';
+         $email = new SendGrid\Mail\Mail();
+         $email->setFrom("rushikeshsurve193@gmail.com", "Rushikesh Surve");
+         $email->setSubject($subject);
+         $email->addTo($to);
+         $email->addContent("text/html", $message);
+
+         try {
+            $response = $sendgrid->send($email);
+            $success = 'An email has been sent with instructions to reset your password.';
+         } catch (Exception $e) {
+            $error = 'Error sending email: ' . $e->getMessage();
+         }
+      } else {
+         $error = 'Email address not found.';
+      }
+   }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <link rel="stylesheet" href="css/all.min.css">
    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
    <div class="form-container">
       <form action="" method="post">
@@ -85,4 +90,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </form>
    </div>
 </body>
+
 </html>
