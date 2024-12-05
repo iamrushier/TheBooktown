@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
          $_SESSION['user_name'] = $row['name'];
          $_SESSION['user_email'] = $row['email'];
          $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
+         header('location:index.php');
          exit(); // Added exit to stop further execution after redirection
       } else {
          $message[] = 'Incorrect Email or Password!';

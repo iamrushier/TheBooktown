@@ -45,7 +45,7 @@ if ($user_id == 0) {
 
    <div class="heading">
       <h3>Your Orders</h3>
-      <p> <a href="home.php">Home</a> / Orders </p>
+      <p> <a href="index.php">Home</a> / Orders </p>
    </div>
 
    <section class="placed-orders">

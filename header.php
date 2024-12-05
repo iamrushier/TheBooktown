@@ -15,10 +15,10 @@ if ($l > 0) {
 <header class="header">
    <div class="flex">
       <div class="logo">
-         <a href="home.php" id="shop-name">The Booktown</a>
+         <a href="index.php" id="shop-name">The Booktown</a>
       </div>
       <nav class="navbar">
-         <a href="home.php">Home</a>
+         <a href="index.php">Home</a>
          <a href="about.php">About</a>
          <a href="shop.php">Shop</a>
          <a href="contact.php">Contact</a>
