@@ -34,7 +34,7 @@ if ($l > 0) {
 
    <div class="heading">
       <h3>About Us</h3>
-      <p> <a href="home.php">Home</a> / About </p>
+      <p> <a href="index.php">Home</a> / About </p>
    </div>
 
    <section class="about">
