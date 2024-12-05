@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
          
          $sendgrid = new SendGrid($emailAPIKey);
 
-         $resetLink = 'http://localhost/TheBooktown/reset_password.php?token=' . $token;
+         $resetLink = 'http://localhost/thebooktown/reset_password.php?token=' . $token;
          $to = $email;
          $subject = 'Reset Your Password';
          $message = 'Dear user,<br><br>Please click the link below to reset your password:<br><a href="' . $resetLink . '">Reset Password</a><br><br>If you did not request this, please ignore this email.<br><br>Best regards,<br>Your Website Team';
