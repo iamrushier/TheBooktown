@@ -1,12 +1,8 @@
 <?php
-// Specify the SQLite database file path
-$db_path = 'database/shop_db.sqlite3';
+$db_host = getenv('DB_HOST');
+$db_user = getenv('MYSQL_USER');
+$db_pass = getenv('MYSQL_PASSWORD');
+$db_name = getenv('MYSQL_DATABASE');
 
-// Create a new SQLite3 connection
-$conn = new SQLite3($db_path);
-
-// Check if the connection is successful
-if (!$conn) {
-    die("Connection failed: " . $conn->lastErrorMsg());
-}
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>

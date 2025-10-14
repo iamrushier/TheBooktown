@@ -16,21 +16,18 @@ if ($user_id == 0) {
    exit(); // Added exit to stop execution after redirection
 }
 if (isset($_POST['order_btn'])) {
-   $name = $_POST['name'];
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
    $number = $_POST['number'];
-   $email = $_POST['email'];
-   $method = $_POST['method'];
-   $address = 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code'];
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $method = mysqli_real_escape_string($conn, $_POST['method']);
+   $address = mysqli_real_escape_string($conn, 'flat no. ' . $_POST['flat'] . ', ' . $_POST['street'] . ', ' . $_POST['city'] . ', ' . $_POST['state'] . ', ' . $_POST['country'] . ' - ' . $_POST['pin_code']);
    $placed_on = date('d-M-Y');
 
    $cart_total = 0;
-   $cart_products = [];
-   $cart_query = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
-   $cart_query->bindParam(1, $user_id, SQLITE3_INTEGER);
-   $result = $cart_query->execute();
-
-   if ($result) {
-      while ($cart_item = $result->fetchArray(SQLITE3_ASSOC)) {
+   $cart_products[] = '';
+   $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+   if (mysqli_num_rows($cart_query) > 0) {
+      while ($cart_item = mysqli_fetch_assoc($cart_query)) {
          $cart_products[] = $cart_item['name'] . ' (' . $cart_item['quantity'] . ') ';
          $sub_total = ($cart_item['price'] * $cart_item['quantity']);
          $cart_total += $sub_total;
@@ -39,40 +36,17 @@ if (isset($_POST['order_btn'])) {
 
    $total_products = implode(', ', $cart_products);
 
-   $order_query = $conn->prepare("SELECT * FROM orders WHERE name = ? AND number = ? AND email = ? AND method = ? AND address = ? AND total_products = ? AND total_price = ?");
-   $order_query->bindParam(1, $name, SQLITE3_TEXT);
-   $order_query->bindParam(2, $number, SQLITE3_TEXT);
-   $order_query->bindParam(3, $email, SQLITE3_TEXT);
-   $order_query->bindParam(4, $method, SQLITE3_TEXT);
-   $order_query->bindParam(5, $address, SQLITE3_TEXT);
-   $order_query->bindParam(6, $total_products, SQLITE3_TEXT);
-   $order_query->bindParam(7, $cart_total, SQLITE3_INTEGER);
-   $result = $order_query->execute();
+   $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$cart_total'") or die('query failed');
 
    if ($cart_total == 0) {
-      $message[] = 'Your cart is empty';
+      $message[] = 'your cart is empty';
    } else {
-      if ($result && $result->fetchArray(SQLITE3_ASSOC)) {
-         $message[] = 'Order already placed!';
+      if (mysqli_num_rows($order_query) > 0) {
+         $message[] = 'order already placed!';
       } else {
-         $insert_order = $conn->prepare("INSERT INTO orders(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-         $insert_order->bindParam(1, $user_id, SQLITE3_INTEGER);
-         $insert_order->bindParam(2, $name, SQLITE3_TEXT);
-         $insert_order->bindParam(3, $number, SQLITE3_TEXT);
-         $insert_order->bindParam(4, $email, SQLITE3_TEXT);
-         $insert_order->bindParam(5, $method, SQLITE3_TEXT);
-         $insert_order->bindParam(6, $address, SQLITE3_TEXT);
-         $insert_order->bindParam(7, $total_products, SQLITE3_TEXT);
-         $insert_order->bindParam(8, $cart_total, SQLITE3_INTEGER);
-         $insert_order->bindParam(9, $placed_on, SQLITE3_TEXT);
-         if ($insert_order->execute()) {
-            $message[] = 'Order Placed Successfully!';
-            $delete_cart = $conn->prepare("DELETE FROM cart WHERE user_id = ?");
-            $delete_cart->bindParam(1, $user_id, SQLITE3_INTEGER);
-            $delete_cart->execute();
-         } else {
-            $message[] = 'Failed to place order';
-         }
+         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed');
+         $message[] = 'order placed successfully!';
+         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
       }
    }
    header('Location: orders.php');
@@ -118,27 +92,24 @@ if (isset($_POST['order_btn'])) {
 
       <?php
       $grand_total = 0;
-      $select_cart = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
-      $select_cart->bindParam(1, $user_id, SQLITE3_INTEGER);
-      $result = $select_cart->execute();
-
-      if ($result) {
-         while ($fetch_cart = $result->fetchArray(SQLITE3_ASSOC)) {
+      $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+      if (mysqli_num_rows($select_cart) > 0) {
+         while ($fetch_cart = mysqli_fetch_assoc($select_cart)) {
             $total_price = ($fetch_cart['price'] * $fetch_cart['quantity']);
             $grand_total += $total_price;
             ?>
             <p>
                <?php echo $fetch_cart['name']; ?> <span>(
-                  <?php echo $fetch_cart['quantity'] . ' x ' . '₹' . $fetch_cart['price'] . '/-'; ?>)
+                  <?php echo '₹' . $fetch_cart['price'] . '/-' . ' x ' . $fetch_cart['quantity']; ?>)
                </span>
             </p>
             <?php
          }
       } else {
-         echo '<p class="empty">Your cart is empty</p>';
+         echo '<p class="empty">your cart is empty</p>';
       }
       ?>
-      <div class="grand-total"> Grand total : <span>₹
+      <div class="grand-total"> grand total : <span>₹
             <?php echo $grand_total; ?>/-
          </span> </div>
 

@@ -8,7 +8,7 @@ if (!isset($admin_id)) {
 
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
-   $conn->exec("DELETE FROM message WHERE id = '$delete_id'") or die('Query failed');
+   mysqli_query($conn, "DELETE FROM `message` WHERE id = '$delete_id'") or die('query failed');
    header('location:admin_contacts.php');
 }
 ?>
@@ -35,9 +35,9 @@ if (isset($_GET['delete'])) {
       <h1 class="title"> Messages </h1>
       <div class="box-container">
          <?php
-         $select_message = $conn->query("SELECT * FROM message") or die('Query failed');
-         if ($select_message->numColumns() > 0) {
-            while ($fetch_message = $select_message->fetchArray(SQLITE3_ASSOC)) {
+         $select_message = mysqli_query($conn, "SELECT * FROM `message`") or die('query failed');
+         if (mysqli_num_rows($select_message) > 0) {
+            while ($fetch_message = mysqli_fetch_assoc($select_message)) {
                ?>
 
                <div class="box">

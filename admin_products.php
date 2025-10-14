@@ -10,56 +10,41 @@ if (!isset($admin_id)) {
 }
 
 if (isset($_POST['add_product'])) {
-   $name = $_POST['name'];
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
    $price = $_POST['price'];
-   $author = $_POST['author'];
-   $description = $_POST['description'];
-   $description = str_replace("'", "\\'", $description);
+   $author = mysqli_real_escape_string($conn, $_POST['author']);
+   $description = mysqli_real_escape_string($conn, $_POST['description']);
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'images/' . $image;
 
-   $stmt = $conn->prepare("SELECT name FROM products WHERE name = ?");
-   $stmt->bindValue(1, $name, SQLITE3_TEXT);
-   $result = $stmt->execute();
+   $select_products = mysqli_query($conn, "SELECT * FROM `products` WHERE name = '$name'") or die('query failed');
 
-   if ($result->fetchArray(SQLITE3_ASSOC)) {
-      $message[] = 'Product name already added';
+   if (mysqli_num_rows($select_products) > 0) {
+      $message[] = 'product name already added';
    } else {
-      $stmt = $conn->prepare("INSERT INTO products(name, price, image, author, description) VALUES(?, ?, ?, ?, ?)");
-      $stmt->bindValue(1, $name, SQLITE3_TEXT);
-      $stmt->bindValue(2, $price, SQLITE3_INTEGER);
-      $stmt->bindValue(3, $image, SQLITE3_TEXT);
-      $stmt->bindValue(4, $author, SQLITE3_TEXT);
-      $stmt->bindValue(5, $description, SQLITE3_TEXT);
-      $result = $stmt->execute();
+      $add_product_query = mysqli_query($conn, "INSERT INTO `products`(name, price, image, author, description) VALUES('$name', '$price', '$image', '$author', '$description')") or die('query failed');
 
-      if ($result) {
+      if ($add_product_query) {
          if ($image_size > 2000000) {
-            $message[] = 'Image size is too large';
+            $message[] = 'image size is too large';
          } else {
             move_uploaded_file($image_tmp_name, $image_folder);
-            $message[] = 'Product added successfully!';
+            $message[] = 'product added successfully!';
          }
       } else {
-         $message[] = 'Product could not be added!';
+         $message[] = 'product could not be added!';
       }
    }
 }
 
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
-   $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
-   $stmt->bindValue(1, $delete_id, SQLITE3_INTEGER);
-   $result = $stmt->execute();
-   $fetch_delete_image = $result->fetchArray(SQLITE3_ASSOC);
+   $delete_image_query = mysqli_query($conn, "SELECT image FROM `products` WHERE id = '$delete_id'") or die('query failed');
+   $fetch_delete_image = mysqli_fetch_assoc($delete_image_query);
    unlink('images/' . $fetch_delete_image['image']);
-   
-   $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
-   $stmt->bindValue(1, $delete_id, SQLITE3_INTEGER);
-   $result = $stmt->execute();
-
+   mysqli_query($conn, "DELETE FROM `products` WHERE id = '$delete_id'") or die('query failed');
    header('location:admin_products.php');
 }
 
@@ -68,11 +53,7 @@ if (isset($_POST['update_product'])) {
    $update_name = $_POST['update_name'];
    $update_price = $_POST['update_price'];
 
-   $stmt = $conn->prepare("UPDATE products SET name = ?, price = ? WHERE id = ?");
-   $stmt->bindValue(1, $update_name, SQLITE3_TEXT);
-   $stmt->bindValue(2, $update_price, SQLITE3_INTEGER);
-   $stmt->bindValue(3, $update_p_id, SQLITE3_INTEGER);
-   $result = $stmt->execute();
+   mysqli_query($conn, "UPDATE `products` SET name = '$update_name', price = '$update_price' WHERE id = '$update_p_id'") or die('query failed');
 
    $update_image = $_FILES['update_image']['name'];
    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
@@ -82,13 +63,9 @@ if (isset($_POST['update_product'])) {
 
    if (!empty($update_image)) {
       if ($update_image_size > 2000000) {
-         $message[] = 'Image file size is too large';
+         $message[] = 'image file size is too large';
       } else {
-         $stmt = $conn->prepare("UPDATE products SET image = ? WHERE id = ?");
-         $stmt->bindValue(1, $update_image, SQLITE3_TEXT);
-         $stmt->bindValue(2, $update_p_id, SQLITE3_INTEGER);
-         $result = $stmt->execute();
-
+         mysqli_query($conn, "UPDATE `products` SET image = '$update_image' WHERE id = '$update_p_id'") or die('query failed');
          move_uploaded_file($update_image_tmp_name, $update_folder);
          unlink('images/' . $update_old_image);
       }
@@ -132,21 +109,24 @@ if (isset($_POST['update_product'])) {
    <section class="show-products">
       <div class="box-container">
          <?php
-         $stmt = $conn->prepare("SELECT * FROM products");
-         $result = $stmt->execute();
-         while ($fetch_products = $result->fetchArray(SQLITE3_ASSOC)) {
-            ?>
-            <div class="box">
-               <img src="images/<?php echo $fetch_products['image']; ?>" alt="">
-               <div class="name">
-                  <?php echo $fetch_products['name']; ?>
+         $select_products = mysqli_query($conn, "SELECT * FROM `products`") or die('query failed');
+         if (mysqli_num_rows($select_products) > 0) {
+            while ($fetch_products = mysqli_fetch_assoc($select_products)) {
+               ?>
+               <div class="box">
+                  <img src="images/<?php echo $fetch_products['image']; ?>" alt="">
+                  <div class="name">
+                     <?php echo $fetch_products['name']; ?>
+                  </div>
+                  <div class="price">$<?php echo $fetch_products['price']; ?>/-</div>
+                  <a href="admin_products.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">Update</a>
+                  <a href="admin_products.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn"
+                     onclick="return confirm('Delete this product?');">Delete</a>
                </div>
-               <div class="price">$<?php echo $fetch_products['price']; ?>/-</div>
-               <a href="admin_products.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">Update</a>
-               <a href="admin_products.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn"
-                  onclick="return confirm('Delete this product?');">Delete</a>
-            </div>
-            <?php
+               <?php
+            }
+         } else {
+            echo '<p class="empty">no products added yet!</p>';
          }
          ?>
       </div>
@@ -156,24 +136,24 @@ if (isset($_POST['update_product'])) {
       <?php
       if (isset($_GET['update'])) {
          $update_id = $_GET['update'];
-         $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
-         $stmt->bindValue(1, $update_id, SQLITE3_INTEGER);
-         $result = $stmt->execute();
-         while ($fetch_update = $result->fetchArray(SQLITE3_ASSOC)) {
-            ?>
-            <form action="" method="post" enctype="multipart/form-data">
-               <input type="hidden" name="update_p_id" value="<?php echo $fetch_update['id']; ?>">
-               <input type="hidden" name="update_old_image" value="<?php echo $fetch_update['image']; ?>">
-               <img src="images/<?php echo $fetch_update['image']; ?>" alt="">
-               <input type="text" name="update_name" value="<?php echo $fetch_update['name']; ?>" class="box" required
-                  placeholder="Enter product name">
-               <input type="number" name="update_price" value="<?php echo $fetch_update['price']; ?>" min="0" class="box"
-                  required placeholder="Enter product price">
-               <input type="file" class="box" name="update_image" accept="image/jpg, image/jpeg, image/png">
-               <input type="submit" value="update" name="update_product" class="btn">
-               <input type="reset" value="cancel" id="close-update" class="option-btn">
-            </form>
-            <?php
+         $update_query = mysqli_query($conn, "SELECT * FROM `products` WHERE id = '$update_id'") or die('query failed');
+         if (mysqli_num_rows($update_query) > 0) {
+            while ($fetch_update = mysqli_fetch_assoc($update_query)) {
+               ?>
+               <form action="" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="update_p_id" value="<?php echo $fetch_update['id']; ?>">
+                  <input type="hidden" name="update_old_image" value="<?php echo $fetch_update['image']; ?>">
+                  <img src="images/<?php echo $fetch_update['image']; ?>" alt="">
+                  <input type="text" name="update_name" value="<?php echo $fetch_update['name']; ?>" class="box" required
+                     placeholder="Enter product name">
+                  <input type="number" name="update_price" value="<?php echo $fetch_update['price']; ?>" min="0" class="box"
+                     required placeholder="Enter product price">
+                  <input type="file" class="box" name="update_image" accept="image/jpg, image/jpeg, image/png">
+                  <input type="submit" value="update" name="update_product" class="btn">
+                  <input type="reset" value="cancel" id="close-update" class="option-btn">
+               </form>
+               <?php
+            }
          }
       } else {
          echo '<script>document.querySelector(".edit-product-form").style.display = "none";</script>';

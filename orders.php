@@ -55,12 +55,9 @@ if ($user_id == 0) {
       <div class="box-container">
 
          <?php
-         $order_query = $conn->prepare("SELECT * FROM orders WHERE user_id = ?");
-         $order_query->bindParam(1, $user_id, SQLITE3_INTEGER);
-         $result = $order_query->execute();
-
-         if ($result) {
-            while ($fetch_orders = $result->fetchArray(SQLITE3_ASSOC)) {
+         $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE user_id = '$user_id'") or die('query failed');
+         if (mysqli_num_rows($order_query) > 0) {
+            while ($fetch_orders = mysqli_fetch_assoc($order_query)) {
                ?>
                <div class="box">
                   <p> Placed on : <span>
@@ -88,14 +85,19 @@ if ($user_id == 0) {
                         <?php echo $fetch_orders['total_price']; ?>/-
                      </span> </p>
                   <p> Payment Status : <span
-                        style="color:<?php echo $fetch_orders['payment_status'] == 'pending' ? 'red' : 'green'; ?>;">
+                        style="color:<?php if ($fetch_orders['payment_status'] == 'pending') {
+                           echo 'red';
+                        } else {
+                           echo 'green';
+                        }
+                        ; ?>">
                         <?php echo $fetch_orders['payment_status']; ?>
                      </span> </p>
                </div>
                <?php
             }
          } else {
-            echo '<p class="empty">No orders placed yet!</p>';
+            echo '<p class="empty">no orders placed yet!</p>';
          }
          ?>
       </div>

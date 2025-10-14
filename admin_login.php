@@ -3,16 +3,13 @@ include 'config.php';
 session_start();
 
 if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
     $pass = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE email = :email AND password = :password");
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $pass);
-    $result = $stmt->execute();
+    $select_admin = mysqli_query($conn, "SELECT * FROM `admin` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
-    $row = $result->fetchArray(SQLITE3_ASSOC);
-    if ($row) {
+    if (mysqli_num_rows($select_admin) > 0) {
+        $row = mysqli_fetch_assoc($select_admin);
         $_SESSION['admin_name'] = $row['name'];
         $_SESSION['admin_email'] = $row['email'];
         $_SESSION['admin_id'] = $row['id'];

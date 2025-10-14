@@ -3,34 +3,22 @@
 include 'config.php';
 
 if (isset($_POST['submit'])) {
-   $name = $_POST['name'];
-   $email = $_POST['email'];
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = md5($_POST['password']);
    $cpass = md5($_POST['cpassword']);
 
-   $select_users = $conn->prepare("SELECT * FROM `users` WHERE email = ? AND password = ?");
-   $select_users->bindParam(1, $email, SQLITE3_TEXT);
-   $select_users->bindParam(2, $pass, SQLITE3_TEXT);
-   $result = $select_users->execute();
+   $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
-   if ($result->fetchArray(SQLITE3_ASSOC)) {
-      $message[] = 'User Already Exists!';
+   if (mysqli_num_rows($select_users) > 0) {
+      $message[] = 'user already exist!';
    } else {
       if ($pass != $cpass) {
-         $message[] = 'Passwords Do Not Match!';
+         $message[] = 'confirm password not matched!';
       } else {
-         $insert_user = $conn->prepare("INSERT INTO `users`(name, email, password) VALUES(?, ?, ?)");
-         $insert_user->bindParam(1, $name, SQLITE3_TEXT);
-         $insert_user->bindParam(2, $email, SQLITE3_TEXT);
-         $insert_user->bindParam(3, $cpass, SQLITE3_TEXT);
-
-         if ($insert_user->execute()) {
-            $message[] = 'Registered Successfully!';
-            header('location:login.php');
-            exit(); // Added to stop execution after redirection
-         } else {
-            $message[] = 'Failed to register user!';
-         }
+         mysqli_query($conn, "INSERT INTO `users`(name, email, password) VALUES('$name', '$email', '$cpass')") or die('query failed');
+         $message[] = 'registered successfully!';
+         header('location:login.php');
       }
    }
 }

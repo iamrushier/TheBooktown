@@ -12,11 +12,7 @@ if (!isset($admin_id)) {
 
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
-   
-   $stmt = $conn->prepare("DELETE FROM users WHERE id = ?");
-   $stmt->bindValue(1, $delete_id, SQLITE3_INTEGER);
-   $result = $stmt->execute();
-
+   mysqli_query($conn, "DELETE FROM `users` WHERE id = '$delete_id'") or die('query failed');
    header('location:admin_users.php');
 }
 
@@ -47,9 +43,8 @@ if (isset($_GET['delete'])) {
 
       <div class="box-container">
          <?php
-         $stmt = $conn->prepare("SELECT * FROM users");
-         $result = $stmt->execute();
-         while ($fetch_users = $result->fetchArray(SQLITE3_ASSOC)) {
+         $select_users = mysqli_query($conn, "SELECT * FROM `users`") or die('query failed');
+         while ($fetch_users = mysqli_fetch_assoc($select_users)) {
             ?>
             <div class="box">
                <p> User id : <span>

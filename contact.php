@@ -16,32 +16,18 @@ if ($user_id == 0) {
    exit(); // Added exit to stop execution after redirection
 }
 if (isset($_POST['send'])) {
-   $name = $_POST['name'];
-   $email = $_POST['email'];
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
    $number = $_POST['number'];
-   $msg = $_POST['message'];
+   $msg = mysqli_real_escape_string($conn, $_POST['message']);
 
-   $select_message = $conn->prepare("SELECT * FROM message WHERE name = ? AND email = ? AND number = ? AND message = ?");
-   $select_message->bindParam(1, $name, SQLITE3_TEXT);
-   $select_message->bindParam(2, $email, SQLITE3_TEXT);
-   $select_message->bindParam(3, $number, SQLITE3_TEXT);
-   $select_message->bindParam(4, $msg, SQLITE3_TEXT);
-   $result = $select_message->execute();
+   $select_message = mysqli_query($conn, "SELECT * FROM `message` WHERE name = '$name' AND email = '$email' AND number = '$number' AND message = '$msg'") or die('query failed');
 
-   if ($result->fetchArray(SQLITE3_ASSOC)) {
-      $message[] = 'Message sent already!';
+   if (mysqli_num_rows($select_message) > 0) {
+      $message[] = 'message sent already!';
    } else {
-      $insert_message = $conn->prepare("INSERT INTO message (user_id, name, email, number, message) VALUES (?, ?, ?, ?, ?)");
-      $insert_message->bindParam(1, $user_id, SQLITE3_INTEGER);
-      $insert_message->bindParam(2, $name, SQLITE3_TEXT);
-      $insert_message->bindParam(3, $email, SQLITE3_TEXT);
-      $insert_message->bindParam(4, $number, SQLITE3_TEXT);
-      $insert_message->bindParam(5, $msg, SQLITE3_TEXT);
-      if ($insert_message->execute()) {
-         $message[] = 'Message sent successfully!';
-      } else {
-         $message[] = 'Failed to send message!';
-      }
+      mysqli_query($conn, "INSERT INTO `message`(user_id, name, email, number, message) VALUES('$user_id', '$name', '$email', '$number', '$msg')") or die('query failed');
+      $message[] = 'message sent successfully!';
    }
 }
 
